@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'tabsEsercente', loadChildren: './members/Esercente/tabs/tabs.module#TabsPageModule' },
   { path: 'tabsDriver', loadChildren: './members/Driver/tabs/tabs.module#TabsPageModule' },
   { path: 'register', loadChildren: './access/register/register.module#RegisterPageModule' },
+  { path: 'environment', loadChildren: './environments/environment/environment.module#EnvironmentPageModule' },
 ];
 @NgModule({
   imports: [
