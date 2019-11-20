@@ -1,8 +1,7 @@
-export interface Cliente {
+export interface Esercente {
     id: string;
     nome: string;
     cognome: string;
     email: string;
     avatar?: string;
-    id_ordine?: string;
   }

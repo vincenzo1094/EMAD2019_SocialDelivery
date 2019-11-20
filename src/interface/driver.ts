@@ -1,8 +1,9 @@
-export interface Cliente {
+export interface Driver {
     id: string;
     nome: string;
     cognome: string;
     email: string;
     avatar?: string;
-    id_ordine?: string;
+    id_indirizzo: string;
+    id_spedizione?: string;
   }
