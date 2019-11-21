@@ -5,4 +5,7 @@ export interface Cliente {
     nome: string;
     cognome: string;
     email: string;
+    avatar?: string;
+    id_ordine?: string;
+    preferiti?: Negozio[];
   }
