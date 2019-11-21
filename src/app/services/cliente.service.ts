@@ -10,12 +10,12 @@ import { map } from 'rxjs/operators';
 export class ClienteService {
 
   private clienteCollection: AngularFirestoreCollection<Cliente>;
- 
+
   private cliente: Observable<Cliente[]>;
- 
+
   constructor(db: AngularFirestore) {
     this.clienteCollection = db.collection<Cliente>('clienti');
- 
+
     this.cliente = this.clienteCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
@@ -26,23 +26,23 @@ export class ClienteService {
       })
     );
   }
- 
+
   getTodos() {
     return this.cliente;
   }
- 
+
   getCliente(id) {
     return this.clienteCollection.doc<Cliente>(id).valueChanges();
   }
- 
+
   updateCliente(cliente: Cliente, id: string) {
     return this.clienteCollection.doc(id).update(cliente);
   }
- 
+
   addCliente(cliente: Cliente) {
     return this.clienteCollection.add(cliente);
   }
- 
+
   removeCliente(id) {
     return this.clienteCollection.doc(id).delete();
   }
