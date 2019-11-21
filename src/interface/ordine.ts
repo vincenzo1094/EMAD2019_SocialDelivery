@@ -1,4 +1,5 @@
 import { stato_ordine } from './stato_ordine';
+import {Prodotto} from './prodotto';
 
 export interface Ordine {
     id: string;
@@ -6,4 +7,5 @@ export interface Ordine {
     id_negozio: string;
     id_spedizione: string;
     id_cliente: string;
+    prodotti?: Prodotto[];
   }
