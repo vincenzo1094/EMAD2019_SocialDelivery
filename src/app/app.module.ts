@@ -10,12 +10,23 @@ import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage';
 import { AppComponent } from './app.component';
 
+import { AngularFireModule } from 'angularfire2';
+import { environment } from '../environments/environment';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
+<<<<<<< HEAD
     IonicStorageModule.forRoot()
   ],
+=======
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule],
+>>>>>>> 181ea94f714ddeb5d74d590d0563811a03e1da48
   providers: [
     StatusBar,
     SplashScreen,
