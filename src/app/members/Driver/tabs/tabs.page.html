@@ -1,9 +1,20 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>tabs</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-tabs>
 
-<ion-content>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="riepilogo">
+      <ion-icon name="list"></ion-icon>
+      <ion-label>Riepilogo</ion-label>
+    </ion-tab-button>
 
-</ion-content>
+    <ion-tab-button tab="spedizioni">
+      <ion-icon name="send"></ion-icon>
+      <ion-label>Spedizioni</ion-label>
+    </ion-tab-button>
+
+  <ion-tab-button tab="impostazioni">
+    <ion-icon name="settings"></ion-icon>
+    <ion-label>Impostazioni</ion-label>
+  </ion-tab-button>
+</ion-tab-bar>
+
+</ion-tabs>

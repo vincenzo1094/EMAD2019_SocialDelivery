@@ -1,6 +1,8 @@
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController, MenuController, ToastController, AlertController, LoadingController } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -10,14 +12,19 @@ import { NavController, MenuController, ToastController, AlertController, Loadin
 export class LoginPage implements OnInit {
   public onLoginForm: FormGroup;
 
+  user = {
+    email: '',
+    pw: '',
+
+  };
   constructor(
     public navCtrl: NavController,
     public menuCtrl: MenuController,
     public toastCtrl: ToastController,
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
-    private formBuilder: FormBuilder
-  ) { }
+    private formBuilder: FormBuilder,
+    private auth: AuthService ) { }
 
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
@@ -86,7 +93,22 @@ export class LoginPage implements OnInit {
   }
 
   goToHome() {
-    this.navCtrl.navigateRoot('/tabsCliente');
+    this.auth.goToHome(this.user).subscribe(user => {
+
+      let role = user['role'];
+
+      if (role === 'cliente') {
+        this.navCtrl.navigateRoot('/tabsCliente');
+
+      } else if (role === 'driver') {
+
+        this.navCtrl.navigateRoot('/tabsDriver');
+        
+      } else if (role === 'esercente') {
+
+        this.navCtrl.navigateRoot('/tabsEsercente');
+      }
+    });
   }
 
 }
