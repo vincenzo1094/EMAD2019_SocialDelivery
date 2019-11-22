@@ -11,7 +11,6 @@ const routes: Routes = [
   { path: 'tabsEsercente', loadChildren: './members/Esercente/tabs/tabs.module#TabsPageModule' },
   { path: 'tabsDriver', loadChildren: './members/Driver/tabs/tabs.module#TabsPageModule' },
   { path: 'register', loadChildren: './access/register/register.module#RegisterPageModule' },
-<<<<<<< HEAD
   { path: 'preferiti', loadChildren: './members/Cliente/preferiti/preferiti.module#PreferitiPageModule' },
   { path: 'impostazioni', loadChildren: './members/Cliente/impostazioni/impostazioni.module#ImpostazioniPageModule' },
   { path: 'negozi', loadChildren: './members/Cliente/negozi/negozi.module#NegoziPageModule' },
@@ -25,9 +24,6 @@ const routes: Routes = [
 
 
 
-=======
-  { path: 'environment', loadChildren: './environments/environment/environment.module#EnvironmentPageModule' },
->>>>>>> 181ea94f714ddeb5d74d590d0563811a03e1da48
 ];
 @NgModule({
   imports: [
