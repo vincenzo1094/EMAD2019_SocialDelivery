@@ -8,7 +8,7 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'preferiti',
+        path: 'riepilogo',
         children: [
           {
             path: '',
@@ -18,7 +18,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'negozi',
+        path: 'spedizioni',
         children: [
           {
             path: '',
