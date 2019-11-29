@@ -34,17 +34,17 @@ const routes: Routes = [
             path: '',
             loadChildren: () =>
               import('../impostazioni/impostazioni.module').then(m => m.ImpostazioniPageModule)
-          }
-        ]
-      },
-      {
-        path: '',
-        redirectTo: 'tabs/negozi',
-        pathMatch: 'full'
-      }
-    ]
-  },
-];
+            }
+          ]
+        },
+        {
+          path: '',
+          redirectTo: '/app/members/Esercente/tabs/negozi',
+          pathMatch: 'full'
+        }
+      ]
+    }
+  ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
