@@ -3,6 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController, MenuController, ToastController, AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
+import * as GeoFire from 'geofirex';
+import * as firebase from 'firebase/app';
+import { environment } from './../../../environments/environment';
+import { Negozio} from './../../interface/negozio';
+import {NegozioService} from './../../services/negozio/negozio.service';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +22,15 @@ export class LoginPage implements OnInit {
     pw: '',
 
   };
+
+  negozio: Negozio = {
+    nome: 'nome',
+    id_esercente: 'prova',
+    p_iva: 'prova',
+    prodotti: [],
+    id_indirizzo: 'prova'
+  };
+
   constructor(
     public navCtrl: NavController,
     public menuCtrl: MenuController,
@@ -24,7 +38,8 @@ export class LoginPage implements OnInit {
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
     private formBuilder: FormBuilder,
-    private auth: AuthService ) { }
+    private auth: AuthService,
+    private service: NegozioService ) { }
 
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
@@ -33,10 +48,10 @@ export class LoginPage implements OnInit {
   ngOnInit() {
 
     this.onLoginForm = this.formBuilder.group({
-      'email': [null, Validators.compose([
+      email: [null, Validators.compose([
         Validators.required
       ])],
-      'password': [null, Validators.compose([
+      password: [null, Validators.compose([
         Validators.required
       ])]
     });
@@ -93,9 +108,15 @@ export class LoginPage implements OnInit {
   }
 
   goToHome() {
-    this.auth.goToHome(this.user).subscribe(user => {
+  // firebase.initializeApp(environment.firebase);
+  const geo = GeoFire.init(firebase);
+  this.negozio.id_indirizzo = geo.point(40.807904, 14.621987);
+  this.service.addNegozio(this.negozio);
 
-      let role = user['role'];
+
+  this.auth.goToHome(this.user).subscribe(user => {
+
+      const role = user.role;
 
       if (role === 'cliente') {
         this.navCtrl.navigateRoot('/tabsCliente');
@@ -103,7 +124,7 @@ export class LoginPage implements OnInit {
       } else if (role === 'driver') {
 
         this.navCtrl.navigateRoot('/tabsDriver');
-        
+
       } else if (role === 'esercente') {
 
         this.navCtrl.navigateRoot('/tabsEsercente');

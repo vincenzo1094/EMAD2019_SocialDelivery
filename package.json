@@ -27,8 +27,9 @@
     "@ionic/storage": "^2.2.0",
     "angularfire2": "^5.2.3",
     "core-js": "^2.5.4",
-    "firebase": "^7.4.0",
-    "rxjs": "~6.5.1",
+    "firebase": "^7.5.0",
+    "geofirex": "^0.1.0",
+    "rxjs": "^6.5.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
   },

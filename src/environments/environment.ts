@@ -5,12 +5,13 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: '<your-key>',
-    authDomain: '<your-project-authdomain>',
-    databaseURL: '<your-database-URL>',
-    projectId: '<your-project-id>',
-    storageBucket: '<your-storage-bucket>',
-    messagingSenderId: '<your-messaging-sender-id>'
+    apiKey: "AIzaSyBzBJ9N6QgrT134-JMyja38c_uKPB_E0Bg",
+    authDomain: "socialdelapp.firebaseapp.com",
+    databaseURL: "https://socialdelapp.firebaseio.com",
+    projectId: "socialdelapp",
+    storageBucket: "socialdelapp.appspot.com",
+    messagingSenderId: "1069793701700",
+    appId: "1:1069793701700:web:8128d8e8c6f7d366587111"
   }
 };
 

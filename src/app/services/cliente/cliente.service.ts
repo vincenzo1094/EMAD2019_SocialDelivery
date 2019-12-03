@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Cliente} from './../interface/cliente';
+import {Cliente} from '../../interface/cliente';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -27,7 +27,7 @@ export class ClienteService {
     );
   }
 
-  getTodos() {
+  getClienti() {
     return this.cliente;
   }
 
