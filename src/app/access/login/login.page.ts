@@ -119,7 +119,7 @@ export class LoginPage implements OnInit {
       const role = user.role;
 
       if (role === 'cliente') {
-        this.navCtrl.navigateRoot('/tabsCliente');
+        this.navCtrl.navigateRoot('/tabsCliente/negozi');
 
       } else if (role === 'driver') {
 
