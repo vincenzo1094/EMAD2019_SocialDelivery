@@ -1,13 +1,12 @@
-import { Negozio } from './negozio';
-import {Ordine} from './ordine';
+import { Mezzo } from './mezzo';
 
 export interface Prodotto {
-    id: string;
+    id?: string;
     nome: string;
+    immagine?: string;
     descrizione?: string;
     prezzo: number;
     quantita: number;
-    id_mezzo: string;
-    negozi?: Negozio[];
-    ordini?: Ordine[];
+    mezzo: Mezzo;
+    id_negozio: string;
   }

@@ -8,6 +8,9 @@ import * as firebase from 'firebase/app';
 import { environment } from './../../../environments/environment';
 import { Negozio} from './../../interface/negozio';
 import {NegozioService} from './../../services/negozio/negozio.service';
+import {ProdottoService} from './../../services/prodotto/prodotto.service';
+import {Prodotto} from './../../interface/prodotto';
+import {Mezzo} from './../../interface/mezzo';
 
 @Component({
   selector: 'app-login',
@@ -73,6 +76,44 @@ export class LoginPage implements OnInit {
     id_indirizzo: ''}
   ];*/
 
+/*prodotti: Prodotto[] = [
+    {nome: 'Patatine San Carlo',
+    descrizione: '',
+    prezzo: 1.00,
+    quantita: 10,
+    mezzo: Mezzo.MOTORINO,
+    id_negozio: 'iUG6dgIFdUakfFWz7cNk'
+    },
+
+    {nome: 'Acqua Panna',
+    descrizione: '',
+    prezzo: 2.99,
+    quantita: 10,
+    mezzo: Mezzo.MOTORINO,
+    id_negozio: 'iUG6dgIFdUakfFWz7cNk'
+    },
+
+    {nome: 'Tonno Rio Mare',
+    descrizione: '',
+    prezzo: 4.99,
+    quantita: 10,
+    mezzo: Mezzo.MOTORINO,
+    id_negozio: 'iUG6dgIFdUakfFWz7cNk'
+    },
+
+    {nome: 'Nutella',
+    descrizione: '',
+    prezzo: 3.99,
+    quantita: 10,
+    mezzo: Mezzo.MOTORINO,
+    id_negozio: 'iUG6dgIFdUakfFWz7cNk'
+    },
+  ];*/
+
+
+
+
+
   constructor(
     public navCtrl: NavController,
     public menuCtrl: MenuController,
@@ -81,7 +122,7 @@ export class LoginPage implements OnInit {
     public loadingCtrl: LoadingController,
     private formBuilder: FormBuilder,
     private auth: AuthService,
-    private service: NegozioService ) { }
+    private service: ProdottoService ) { }
 
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
@@ -163,6 +204,9 @@ export class LoginPage implements OnInit {
   this.negozi.forEach(element => {
     this.service.addNegozio(element);
   });*/
+
+
+
 
 
   this.auth.goToHome(this.user).subscribe(user => {
