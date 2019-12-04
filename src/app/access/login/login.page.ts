@@ -5,6 +5,9 @@ import { NavController, MenuController, ToastController, AlertController, Loadin
 import { AuthService } from 'src/app/services/auth.service';
 import {Cliente} from './../../interface/cliente';
 import {ClienteService} from './../../services/cliente/cliente.service';
+import {Prodotto} from './../../interface/prodotto';
+import { Mezzo } from 'src/app/interface/mezzo';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -69,11 +72,19 @@ export class LoginPage implements OnInit {
     id_indirizzo: ''}
   ];*/
 
-  cliente: Cliente={
-    nome:'Enzo',
-    cognome:'tata',
-    email:'dioporco@madonna.it'
-  };
+
+  prodotti: Prodotto[] = [
+    {nome: 'Sapone Dove',
+    prezzo: 2.50,
+    quantita: 5,
+    mezzo: Mezzo.MOTORINO,
+    },
+
+    
+
+    
+  ];
+  
 
   constructor(
     public navCtrl: NavController,
@@ -176,6 +187,8 @@ export class LoginPage implements OnInit {
 
       if (role === 'cliente') {
         
+        
+
         this.navCtrl.navigateRoot('/tabsCliente/negozi');
 
       } else if (role === 'driver') {
