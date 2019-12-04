@@ -79,6 +79,10 @@ export class NegoziPage implements OnInit, AfterViewInit {
             title: 'Shop',
             icon2
           });
+
+          marker.addListener('click', () => { 
+            this.viewOrdini();
+          });
           
         }));
       // map.setMapTypeId('roadmap');
@@ -91,7 +95,7 @@ export class NegoziPage implements OnInit, AfterViewInit {
 
 
   viewOrdini() {
-    this.navCtrl.navigateRoot('/tabsCliente/ordini');
+    this.navCtrl.navigateRoot('/tabsCliente/prodotti');
   }
 
   viewImpostazioni() {
