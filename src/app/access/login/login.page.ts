@@ -3,6 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController, MenuController, ToastController, AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
+import * as GeoFire from 'geofirex';
+import * as firebase from 'firebase/app';
+import { environment } from './../../../environments/environment';
+import { Negozio} from './../../interface/negozio';
+import {NegozioService} from './../../services/negozio/negozio.service';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +22,57 @@ export class LoginPage implements OnInit {
     pw: '',
 
   };
+
+  /*negozi: Negozio[] = [
+    {nome: 'Cartografia',
+    id_esercente: '',
+    p_iva: '',
+    prodotti: [],
+    id_indirizzo: ''},
+
+    {nome: 'Ferramenta da Gino',
+    id_esercente: '',
+    p_iva: '',
+    prodotti: [],
+    id_indirizzo: ''},
+
+    {nome: 'Acqua e Sapone',
+    id_esercente: '',
+    p_iva: '',
+    prodotti: [],
+    id_indirizzo: ''},
+
+    {nome: 'Macelleria',
+    id_esercente: '',
+    p_iva: '',
+    prodotti: [],
+    id_indirizzo: ''},
+
+    {nome: 'La cantinella',
+    id_esercente: '',
+    p_iva: '',
+    prodotti: [],
+    id_indirizzo: ''},
+
+    {nome: 'Candy villa',
+    id_esercente: '',
+    p_iva: '',
+    prodotti: [],
+    id_indirizzo: ''},
+
+    {nome: 'Frutta e verdura',
+    id_esercente: '',
+    p_iva: '',
+    prodotti: [],
+    id_indirizzo: ''},
+
+    {nome: 'OFFICINA',
+    id_esercente: '',
+    p_iva: '',
+    prodotti: [],
+    id_indirizzo: ''}
+  ];*/
+
   constructor(
     public navCtrl: NavController,
     public menuCtrl: MenuController,
@@ -24,7 +80,8 @@ export class LoginPage implements OnInit {
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
     private formBuilder: FormBuilder,
-    private auth: AuthService ) { }
+    private auth: AuthService,
+    private service: NegozioService ) { }
 
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
@@ -33,10 +90,10 @@ export class LoginPage implements OnInit {
   ngOnInit() {
 
     this.onLoginForm = this.formBuilder.group({
-      'email': [null, Validators.compose([
+      email: [null, Validators.compose([
         Validators.required
       ])],
-      'password': [null, Validators.compose([
+      password: [null, Validators.compose([
         Validators.required
       ])]
     });
@@ -93,17 +150,32 @@ export class LoginPage implements OnInit {
   }
 
   goToHome() {
-    this.auth.goToHome(this.user).subscribe(user => {
+  // firebase.initializeApp(environment.firebase);
+  /*const geo = GeoFire.init(firebase);
+  this.negozi[0].id_indirizzo = geo.point(40.7709885, 14.7981127);
+  this.negozi[1].id_indirizzo = geo.point(40.7710536, 14.797461);
+  this.negozi[2].id_indirizzo = geo.point(40.7709146, 14.7982666);
+  this.negozi[3].id_indirizzo = geo.point(40.7716727, 14.7969504);
+  this.negozi[4].id_indirizzo = geo.point(40.6786549, 14.7579052);
+  this.negozi[5].id_indirizzo = geo.point(40.6792604, 14.7529254);
+  this.negozi[6].id_indirizzo = geo.point(40.6792401, 14.7525687);
+  this.negozi[7].id_indirizzo = geo.point(40.6814556, 14.7659691);
+  this.negozi.forEach(element => {
+    this.service.addNegozio(element);
+  });*/
 
-      let role = user['role'];
+
+  this.auth.goToHome(this.user).subscribe(user => {
+
+      const role = user.role;
 
       if (role === 'cliente') {
-        this.navCtrl.navigateRoot('/tabsCliente');
+        this.navCtrl.navigateRoot('/tabsCliente/negozi');
 
       } else if (role === 'driver') {
 
         this.navCtrl.navigateRoot('/tabsDriver');
-        
+
       } else if (role === 'esercente') {
 
         this.navCtrl.navigateRoot('/tabsEsercente');

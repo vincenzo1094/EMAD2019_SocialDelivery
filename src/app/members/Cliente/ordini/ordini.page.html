@@ -1,9 +1,37 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>ordini</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
-</ion-content>
+    <ion-toolbar>
+     <ion-buttons slot="start">
+        <ion-button (click)="viewPreferiti()">
+            <ion-icon slot="icon-only" name="bookmark"></ion-icon>
+          </ion-button>
+    </ion-buttons> 
+    <ion-searchbar></ion-searchbar>
+      <ion-buttons slot="end">
+        <ion-button>
+          <ion-icon slot="icon-only" name="options"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+      <div #mapElement class="map"></div>
+  </ion-content>
+  
+  <ion-footer>
+    <ion-toolbar>
+      <ion-buttons slot="secondary"> 
+        <ion-button (click)="viewNegozi()">
+          <ion-icon slot="icon-only" name="map"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+  
+      <ion-title>Ordini</ion-title>
+  
+      <ion-buttons slot="primary">
+        <ion-button (click)="viewImpostazioni()">
+          <ion-icon slot="icon-only" name="settings"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-footer>

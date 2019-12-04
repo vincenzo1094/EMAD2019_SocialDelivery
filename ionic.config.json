@@ -1,5 +1,7 @@
 {
   "name": "EMAD2019_SocialDelivery",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
