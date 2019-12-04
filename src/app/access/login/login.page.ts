@@ -11,6 +11,7 @@ import {NegozioService} from './../../services/negozio/negozio.service';
 import {ProdottoService} from './../../services/prodotto/prodotto.service';
 import {Prodotto} from './../../interface/prodotto';
 import {Mezzo} from './../../interface/mezzo';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-login',
@@ -82,7 +83,6 @@ export class LoginPage implements OnInit {
     prezzo: 1.00,
     quantita: 10,
     mezzo: Mezzo.MOTORINO,
-    id_negozio: 'iUG6dgIFdUakfFWz7cNk'
     },
 
     {nome: 'Acqua Panna',
@@ -90,7 +90,6 @@ export class LoginPage implements OnInit {
     prezzo: 2.99,
     quantita: 10,
     mezzo: Mezzo.MOTORINO,
-    id_negozio: 'iUG6dgIFdUakfFWz7cNk'
     },
 
     {nome: 'Tonno Rio Mare',
@@ -98,7 +97,6 @@ export class LoginPage implements OnInit {
     prezzo: 4.99,
     quantita: 10,
     mezzo: Mezzo.MOTORINO,
-    id_negozio: 'iUG6dgIFdUakfFWz7cNk'
     },
 
     {nome: 'Nutella',
@@ -106,7 +104,6 @@ export class LoginPage implements OnInit {
     prezzo: 3.99,
     quantita: 10,
     mezzo: Mezzo.MOTORINO,
-    id_negozio: 'iUG6dgIFdUakfFWz7cNk'
     },
   ];*/
 
@@ -122,7 +119,9 @@ export class LoginPage implements OnInit {
     public loadingCtrl: LoadingController,
     private formBuilder: FormBuilder,
     private auth: AuthService,
-    private service: ProdottoService ) { }
+    private serviceProd: ProdottoService,
+    private serviceNeg: NegozioService,
+    ) { }
 
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
@@ -214,6 +213,7 @@ export class LoginPage implements OnInit {
       const role = user.role;
 
       if (role === 'cliente') {
+        
         this.navCtrl.navigateRoot('/tabsCliente/negozi');
 
       } else if (role === 'driver') {

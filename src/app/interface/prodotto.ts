@@ -8,5 +8,5 @@ export interface Prodotto {
     prezzo: number;
     quantita: number;
     mezzo: Mezzo;
-    id_negozio: string;
+    id_negozio?: string;
   }
