@@ -1,9 +1,26 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>negozi</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>
+      I Miei Negozi
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button slot="icon-only" (click)="plusButtonPressed()">
+          <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-list>
+      <ion-item button (click)="listElementClicked(shop)" *ngFor="let shop of shops">
+        <ion-avatar>
+          <img src="https://www.trzcacak.rs/myfile/full/227-2270330_retail-icon-shop-transparent-png.png">
+        </ion-avatar>
+        <ion-label padding> 
+            {{shop}}
+        </ion-label>
+        
+      </ion-item>
+  </ion-list>
 </ion-content>
