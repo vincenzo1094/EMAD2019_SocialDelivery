@@ -40,7 +40,11 @@ export class ClienteService {
   }
 
   addCliente(cliente: Cliente) {
-    return this.clienteCollection.add(cliente);
+    let a = this.clienteCollection.add(cliente);
+    a.then(function(id){
+      console.log(id.id);
+    })
+    return a;
   }
 
   removeCliente(id) {

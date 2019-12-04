@@ -3,16 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController, MenuController, ToastController, AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
-import * as GeoFire from 'geofirex';
-import * as firebase from 'firebase/app';
-import { environment } from './../../../environments/environment';
-import { Negozio} from './../../interface/negozio';
-import {NegozioService} from './../../services/negozio/negozio.service';
-import {ProdottoService} from './../../services/prodotto/prodotto.service';
-import {Prodotto} from './../../interface/prodotto';
-import {Mezzo} from './../../interface/mezzo';
-import { element } from 'protractor';
-
+import {Cliente} from './../../interface/cliente';
+import {ClienteService} from './../../services/cliente/cliente.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -77,39 +69,11 @@ export class LoginPage implements OnInit {
     id_indirizzo: ''}
   ];*/
 
-/*prodotti: Prodotto[] = [
-    {nome: 'Patatine San Carlo',
-    descrizione: '',
-    prezzo: 1.00,
-    quantita: 10,
-    mezzo: Mezzo.MOTORINO,
-    },
-
-    {nome: 'Acqua Panna',
-    descrizione: '',
-    prezzo: 2.99,
-    quantita: 10,
-    mezzo: Mezzo.MOTORINO,
-    },
-
-    {nome: 'Tonno Rio Mare',
-    descrizione: '',
-    prezzo: 4.99,
-    quantita: 10,
-    mezzo: Mezzo.MOTORINO,
-    },
-
-    {nome: 'Nutella',
-    descrizione: '',
-    prezzo: 3.99,
-    quantita: 10,
-    mezzo: Mezzo.MOTORINO,
-    },
-  ];*/
-
-
-
-
+  cliente: Cliente={
+    nome:'Enzo',
+    cognome:'tata',
+    email:'dioporco@madonna.it'
+  };
 
   constructor(
     public navCtrl: NavController,
@@ -119,9 +83,7 @@ export class LoginPage implements OnInit {
     public loadingCtrl: LoadingController,
     private formBuilder: FormBuilder,
     private auth: AuthService,
-    private serviceProd: ProdottoService,
-    private serviceNeg: NegozioService,
-    ) { }
+    private serve: ClienteService ) { }
 
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
@@ -203,7 +165,7 @@ export class LoginPage implements OnInit {
   this.negozi.forEach(element => {
     this.service.addNegozio(element);
   });*/
-
+  //this.serve.addCliente(this.cliente);
 
 
 

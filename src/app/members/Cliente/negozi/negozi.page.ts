@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { NavController } from '@ionic/angular';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
+import {NegozioService} from './../../../services/negozio/negozio.service';
 declare var google;
 
 @Component({
@@ -15,13 +16,16 @@ export class NegoziPage implements OnInit, AfterViewInit {
   latitude: any;
   longitude: any;
 
+
   addr = {
     lat: '',
     lon: ''
   };
 
   @ViewChild('mapElement', {static: true}) mapNativeElement: ElementRef;
-  constructor(private geolocation: Geolocation, public navCtrl: NavController) { }
+  constructor(private geolocation: Geolocation,
+              public navCtrl: NavController,
+              private serveNegozi: NegozioService) { }
 
   ngOnInit() {
   }
@@ -33,8 +37,8 @@ export class NegoziPage implements OnInit, AfterViewInit {
 
       const map = new google.maps.Map(this.mapNativeElement.nativeElement, {
         center: {lat: -34.397,  lng: 150.644},
-        zoom: 16,
-        disableDefaultUI: true
+        zoom: 10,
+        // disableDefaultUI: true
       });
 
       /*location object*/
@@ -42,46 +46,59 @@ export class NegoziPage implements OnInit, AfterViewInit {
         lat: this.latitude,
         lng: this.longitude
       };
-      const pos2 = {
-        lat: this.latitude + 0.001,
-        lng: this.longitude + 0.001
-      };
-      // map.setMapTypeId('roadmap');
-      map.setCenter(pos2);
+      map.setCenter(pos);
+
       const icon = {
-        url: 'assets/icon/d.png', // image url
-        scaledSize: new google.maps.Size(70, 70), // scaled size
-      };
-      const icon2 = {
         url: 'assets/icon/u.png', // image url
+        scaledSize: new google.maps.Size(40, 40), // scaled size
+      };
+
+      const icon2 = {
+        url: 'assets/icon/s.png', // image url
         scaledSize: new google.maps.Size(70, 70), // scaled size
       };
+
       const marker = new google.maps.Marker({
         position: pos,
         map,
-        title: 'Driver',
+        title: 'User',
         icon
       });
-      const marker2 = new google.maps.Marker({
-        position: pos2,
-        map,
-        title: 'Ciao',
-        icon: icon2
-      });
+
+
+      this.serveNegozi.getGeoQueryNegozi(this.latitude, this.longitude).subscribe(res =>
+        res.forEach(element => {
+          const pos = {
+            lat: element['id_indirizzo'].geopoint.latitude,
+            lng: element['id_indirizzo'].geopoint.longitude
+          };
+
+          const marker = new google.maps.Marker({
+            position: pos,
+            map,
+            title: 'Shop',
+            icon2
+          });
+          
+        }));
+      // map.setMapTypeId('roadmap');
     }).catch((error) => {
       console.log('Error getting location', error);
     });
+    
   }
 
-  viewOrdini(){
+
+
+  viewOrdini() {
     this.navCtrl.navigateRoot('/tabsCliente/ordini');
   }
 
-  viewImpostazioni(){
+  viewImpostazioni() {
     this.navCtrl.navigateRoot('/tabsCliente/impostazioni');
   }
 
-  viewPreferiti(){
+  viewPreferiti() {
     this.navCtrl.navigateRoot('/tabsCliente/preferiti');
   }
 
