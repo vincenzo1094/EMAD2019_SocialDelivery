@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Prodotto } from 'src/app/interface/prodotto';
-import { TouchSequence } from 'selenium-webdriver';
+import { TouchSequence } from 'selenium-webdriver'
+import {ProdottoService} from './../../../services/prodotto/prodotto.service';
 
 @Component({
   selector: 'app-prodotti',
@@ -11,29 +12,24 @@ export class ProdottiPage implements OnInit {
 
   shop = '';
   products : Prodotto[] = [];
+  prodotto: Prodotto;
 
-  constructor() { 
-    this.getProducts();
+  provaProdotto = ["568dWqrGvo8tFsOWrsE2","FcZs4QIShaABKZnKemJP","ZBkXgbom9lp57z1Kv4FL","oTedl9qwETAvy2ItMj7H"];
+
+  constructor(prodService: ProdottoService) { 
+    this.getProducts(prodService);
   }
 
   ngOnInit() {
   }
 
-  getProducts(){
-    //INSERIRE LA CHIAMATA ALLA CLASSE CHE SCARICA I DATI DAL DB
-    //RIEMPIO L'ARRAY CON DATI STATICI
-    let numbers = [1,2,3,4,5];
-    for(let i of numbers){
-      let product = {
-        id: "22",
-        nome: "Prodotto",
-        prezzo: 3.99,
-        quantita: 10,
-        id_mezzo: "40",
-      };
-      this.products.push(product);
+  getProducts(prodService: ProdottoService){
+    for(let id of this.provaProdotto){
+      prodService.getProdotto(id).subscribe(res => {
+        this.prodotto = res;
+        this.products.push(this.prodotto);
+      })
     }
-
   }
 
   listElementClicked(){

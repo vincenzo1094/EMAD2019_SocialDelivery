@@ -167,11 +167,15 @@ export class LoginPage implements OnInit {
   });*/
   //this.serve.addCliente(this.cliente);
 
+
+
+
   this.auth.goToHome(this.user).subscribe(user => {
 
       const role = user.role;
 
       if (role === 'cliente') {
+        
         this.navCtrl.navigateRoot('/tabsCliente/negozi');
 
       } else if (role === 'driver') {

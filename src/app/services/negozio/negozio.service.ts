@@ -15,6 +15,7 @@ export class NegozioService {
 
   private negozio: Observable<Negozio[]>;
 
+  
 
   constructor(db: AngularFirestore,){
     
@@ -52,6 +53,7 @@ export class NegozioService {
   updateNegozio(negozio: Negozio, id: string) {
     return this.negozioCollection.doc(id).update(negozio);
   }
+
 
   addNegozio(negozio: Negozio) {
     return this.negozioCollection.add(negozio);

@@ -99,7 +99,7 @@ export class NegoziPage implements OnInit, AfterViewInit {
 
 
   viewOrdini() {
-    this.navCtrl.navigateRoot('/tabsCliente/ordini');
+    this.navCtrl.navigateRoot('/tabsCliente/prodotti');
   }
 
   viewNegozi() {}
