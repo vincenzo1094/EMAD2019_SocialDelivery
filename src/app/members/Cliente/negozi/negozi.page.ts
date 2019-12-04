@@ -86,8 +86,7 @@ export class NegoziPage implements OnInit, AfterViewInit {
                   prodotti: element['prodotti']
               }
           };
-          console.log(navigationExtras);
-          this.router.navigate(['tabsCliente/ordini'], navigationExtras);
+          this.router.navigate(['tabsCliente/prodotti'], navigationExtras);
           });
         }));
          

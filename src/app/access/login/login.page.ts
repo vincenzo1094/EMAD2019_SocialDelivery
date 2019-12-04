@@ -7,6 +7,7 @@ import {Cliente} from './../../interface/cliente';
 import {ClienteService} from './../../services/cliente/cliente.service';
 import {Prodotto} from './../../interface/prodotto';
 import { Mezzo } from 'src/app/interface/mezzo';
+import {ProdottoService} from './../../services/prodotto/prodotto.service';
 
 @Component({
   selector: 'app-login',
@@ -71,19 +72,6 @@ export class LoginPage implements OnInit {
     prodotti: [],
     id_indirizzo: ''}
   ];*/
-
-
-  prodotti: Prodotto[] = [
-    {nome: 'Sapone Dove',
-    prezzo: 2.50,
-    quantita: 5,
-    mezzo: Mezzo.MOTORINO,
-    },
-
-    
-
-    
-  ];
   
 
   constructor(
@@ -94,7 +82,8 @@ export class LoginPage implements OnInit {
     public loadingCtrl: LoadingController,
     private formBuilder: FormBuilder,
     private auth: AuthService,
-    private serve: ClienteService ) { }
+    private serve: ClienteService,
+    private prodService: ProdottoService ) { }
 
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
@@ -186,7 +175,6 @@ export class LoginPage implements OnInit {
       const role = user.role;
 
       if (role === 'cliente') {
-        
         
 
         this.navCtrl.navigateRoot('/tabsCliente/negozi');
