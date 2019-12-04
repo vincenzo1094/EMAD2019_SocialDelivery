@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as GeoFire from "geofirex";
 import * as firebase from 'firebase/app';
-import { environment } from './../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -44,7 +43,7 @@ export class NegozioService {
   getGeoQueryNegozi(lan: number, lon: number){
     const geo = GeoFire.init(firebase);
     const center = geo.point(lan, lon);
-    const radius = 1;
+    const radius = 30;
     const field = 'id_indirizzo';
 
     const query = geo.query('negozi').within(center, radius, field);
@@ -57,7 +56,6 @@ export class NegozioService {
 
 
   addNegozio(negozio: Negozio) {
-    //const geo = GeoFire.init(firebase);
     return this.negozioCollection.add(negozio);
 
   }

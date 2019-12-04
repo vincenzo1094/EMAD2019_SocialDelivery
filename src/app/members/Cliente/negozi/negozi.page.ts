@@ -47,15 +47,10 @@ export class NegoziPage implements OnInit, AfterViewInit {
         lng: this.longitude
       };
       map.setCenter(pos);
-
+    
       const icon = {
         url: 'assets/icon/u.png', // image url
         scaledSize: new google.maps.Size(40, 40), // scaled size
-      };
-
-      const icon2 = {
-        url: 'assets/icon/s.png', // image url
-        scaledSize: new google.maps.Size(70, 70), // scaled size
       };
 
       const marker = new google.maps.Marker({
@@ -74,11 +69,16 @@ export class NegoziPage implements OnInit, AfterViewInit {
             lng: element['id_indirizzo'].geopoint.longitude
           };
 
+          const icon = {
+            url: 'assets/icon/s.png', // image url
+            scaledSize: new google.maps.Size(40, 40), // scaled size
+          };
+
           const marker = new google.maps.Marker({
             position: pos,
             map,
             title: 'Shop',
-            icon2
+            icon
           });
           marker.addListener('click', ()=>{
             let navigationExtras: NavigationExtras = {
@@ -102,6 +102,8 @@ export class NegoziPage implements OnInit, AfterViewInit {
     this.navCtrl.navigateRoot('/tabsCliente/prodotti');
   }
 
+  viewNegozi() {}
+  
   viewImpostazioni() {
     this.navCtrl.navigateRoot('/tabsCliente/impostazioni');
   }
