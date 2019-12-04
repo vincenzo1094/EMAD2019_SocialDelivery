@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-ordini',
@@ -8,9 +9,12 @@ import { NavController } from '@ionic/angular';
 })
 export class OrdiniPage implements OnInit {
 
-  constructor(public navCtrl: NavController) { }
+  constructor(public navCtrl: NavController, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(async params => {
+      console.log(params["negozio"]);
+    });
   }
 
   viewOrdini(){

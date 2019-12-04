@@ -1,6 +1,6 @@
-
-import { Router } from '@angular/router';
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import { Router } from '@angular/router';
+import { NavigationExtras } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {NegozioService} from './../../../services/negozio/negozio.service';
@@ -11,7 +11,6 @@ declare var google;
   templateUrl: './negozi.page.html',
   styleUrls: ['./negozi.page.scss'],
 })
-
 export class NegoziPage implements OnInit, AfterViewInit {
   latitude: any;
   longitude: any;
@@ -25,7 +24,8 @@ export class NegoziPage implements OnInit, AfterViewInit {
   @ViewChild('mapElement', {static: true}) mapNativeElement: ElementRef;
   constructor(private geolocation: Geolocation,
               public navCtrl: NavController,
-              private serveNegozi: NegozioService) { }
+              private serveNegozi: NegozioService,
+              private router: Router) { }
 
   ngOnInit() {
   }
@@ -68,6 +68,7 @@ export class NegoziPage implements OnInit, AfterViewInit {
 
       this.serveNegozi.getGeoQueryNegozi(this.latitude, this.longitude).subscribe(res =>
         res.forEach(element => {
+          console.log(element);
           const pos = {
             lat: element['id_indirizzo'].geopoint.latitude,
             lng: element['id_indirizzo'].geopoint.longitude
@@ -79,15 +80,22 @@ export class NegoziPage implements OnInit, AfterViewInit {
             title: 'Shop',
             icon2
           });
-          
+          marker.addListener('click', ()=>{
+            let navigationExtras: NavigationExtras = {
+              queryParams: {
+                  negozio: element
+              }
+          };
+          this.router.navigate(['tabsCliente/ordini'], navigationExtras);
+          });
         }));
+         
       // map.setMapTypeId('roadmap');
     }).catch((error) => {
       console.log('Error getting location', error);
     });
-    
+  
   }
-
 
 
   viewOrdini() {
@@ -100,10 +108,6 @@ export class NegoziPage implements OnInit, AfterViewInit {
 
   viewPreferiti() {
     this.navCtrl.navigateRoot('/tabsCliente/preferiti');
-  }
-
-  viewNegozi(){
-    this.navCtrl.navigateRoot('/tabsCliente/negozi');
   }
 
 }
