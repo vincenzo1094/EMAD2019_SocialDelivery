@@ -1,9 +1,46 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>impostazioni</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
-</ion-content>
+    <ion-toolbar>
+       
+    <ion-title>
+      Impostazioni
+    </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+      <div #mapElement class="map"></div>
+  </ion-content>
+  
+  <ion-footer>
+    <ion-toolbar>
+  
+      <ion-buttons > 
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+        <ion-button (click)="viewPreferiti()">
+          <ion-icon slot="icon-only" name="bookmark"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button (click)="viewNegozi()">
+            <ion-icon slot="icon-only" name="map"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button (click)="viewOrdini()">
+          <ion-icon slot="icon-only" name="locate"></ion-icon>
+        </ion-button>
+      </ion-col>
+  
+      <ion-col>
+        <ion-button (click)="viewImpostazioni()">
+          <ion-icon slot="icon-only" name="settings"></ion-icon>
+        </ion-button>
+      </ion-col>
+      </ion-row>
+      </ion-grid>
+      </ion-buttons>
+    </ion-toolbar>
+  
+  </ion-footer>
