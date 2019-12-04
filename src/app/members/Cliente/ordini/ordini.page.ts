@@ -13,8 +13,8 @@ export class OrdiniPage implements OnInit {
   ngOnInit() {
   }
 
-  viewNegozi(){
-    this.navCtrl.navigateRoot('/tabsCliente/negozi');
+  viewOrdini(){
+    this.navCtrl.navigateRoot('/tabsCliente/ordini');
   }
 
   viewImpostazioni(){
@@ -23,6 +23,10 @@ export class OrdiniPage implements OnInit {
 
   viewPreferiti(){
     this.navCtrl.navigateRoot('/tabsCliente/preferiti');
+  }
+
+  viewNegozi(){
+    this.navCtrl.navigateRoot('/tabsCliente/negozi');
   }
 
 }

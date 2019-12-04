@@ -1,3 +1,5 @@
+
+import { Router } from '@angular/router';
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { NavController } from '@ionic/angular';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
@@ -9,6 +11,7 @@ declare var google;
   templateUrl: './negozi.page.html',
   styleUrls: ['./negozi.page.scss'],
 })
+
 export class NegoziPage implements OnInit, AfterViewInit {
   latitude: any;
   longitude: any;
@@ -97,6 +100,10 @@ export class NegoziPage implements OnInit, AfterViewInit {
 
   viewPreferiti() {
     this.navCtrl.navigateRoot('/tabsCliente/preferiti');
+  }
+
+  viewNegozi(){
+    this.navCtrl.navigateRoot('/tabsCliente/negozi');
   }
 
 }

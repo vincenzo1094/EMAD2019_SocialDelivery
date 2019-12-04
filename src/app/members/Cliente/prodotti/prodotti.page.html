@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="end">
+          <ion-button>
+            <ion-icon slot="icon-only" name="cart"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+    <ion-title>Vetrina Negozio</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item button (click)="listElementClicked()" *ngFor="let p of products">
+          <ion-avatar>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Circle-icons-dolly.svg">
+          </ion-avatar>
+          <ion-label padding> 
+              {{p.nome}}
+          </ion-label>
+          <ion-label>
+            € {{p.prezzo}}
+          </ion-label>
+        </ion-item>
+    </ion-list>
+</ion-content>

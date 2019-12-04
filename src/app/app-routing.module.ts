@@ -21,6 +21,7 @@ const routes: Routes = [
   { path: 'tabsEsercente/ordini', loadChildren: './members/Esercente/ordini/ordini.module#OrdiniPageModule' },
   { path: 'tabsEsercente/negozi', loadChildren: './members/Esercente/negozi/negozi.module#NegoziPageModule' },
   { path: 'tabsEsercente/impostazioni', loadChildren: './members/Esercente/impostazioni/impostazioni.module#ImpostazioniPageModule' },
+  { path: 'prodotti', loadChildren: './members/Cliente/prodotti/prodotti.module#ProdottiPageModule' },
 
 
 
