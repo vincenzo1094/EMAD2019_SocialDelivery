@@ -3,12 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController, MenuController, ToastController, AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
-import * as GeoFire from 'geofirex';
-import * as firebase from 'firebase/app';
-import { environment } from './../../../environments/environment';
-import { Negozio} from './../../interface/negozio';
-import {NegozioService} from './../../services/negozio/negozio.service';
-
+import {Cliente} from './../../interface/cliente';
+import {ClienteService} from './../../services/cliente/cliente.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -73,6 +69,12 @@ export class LoginPage implements OnInit {
     id_indirizzo: ''}
   ];*/
 
+  cliente: Cliente={
+    nome:'Enzo',
+    cognome:'tata',
+    email:'dioporco@madonna.it'
+  };
+
   constructor(
     public navCtrl: NavController,
     public menuCtrl: MenuController,
@@ -81,7 +83,7 @@ export class LoginPage implements OnInit {
     public loadingCtrl: LoadingController,
     private formBuilder: FormBuilder,
     private auth: AuthService,
-    private service: NegozioService ) { }
+    private serve: ClienteService ) { }
 
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
@@ -163,7 +165,7 @@ export class LoginPage implements OnInit {
   this.negozi.forEach(element => {
     this.service.addNegozio(element);
   });*/
-
+  //this.serve.addCliente(this.cliente);
 
   this.auth.goToHome(this.user).subscribe(user => {
 
