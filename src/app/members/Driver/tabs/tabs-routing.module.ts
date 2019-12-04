@@ -10,7 +10,7 @@ const routes: Routes = [
       
         {
           path: '',
-          redirectTo: 'riepilogo',
+          redirectTo: '/tabsDriver/impostazioni',
           pathMatch: 'full'
       },
       {
