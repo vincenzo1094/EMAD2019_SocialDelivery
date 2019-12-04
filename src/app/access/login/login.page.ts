@@ -23,13 +23,55 @@ export class LoginPage implements OnInit {
 
   };
 
-  negozio: Negozio = {
-    nome: 'nome',
-    id_esercente: 'prova',
-    p_iva: 'prova',
+  /*negozi: Negozio[] = [
+    {nome: 'Cartografia',
+    id_esercente: '',
+    p_iva: '',
     prodotti: [],
-    id_indirizzo: 'prova'
-  };
+    id_indirizzo: ''},
+
+    {nome: 'Ferramenta da Gino',
+    id_esercente: '',
+    p_iva: '',
+    prodotti: [],
+    id_indirizzo: ''},
+
+    {nome: 'Acqua e Sapone',
+    id_esercente: '',
+    p_iva: '',
+    prodotti: [],
+    id_indirizzo: ''},
+
+    {nome: 'Macelleria',
+    id_esercente: '',
+    p_iva: '',
+    prodotti: [],
+    id_indirizzo: ''},
+
+    {nome: 'La cantinella',
+    id_esercente: '',
+    p_iva: '',
+    prodotti: [],
+    id_indirizzo: ''},
+
+    {nome: 'Candy villa',
+    id_esercente: '',
+    p_iva: '',
+    prodotti: [],
+    id_indirizzo: ''},
+
+    {nome: 'Frutta e verdura',
+    id_esercente: '',
+    p_iva: '',
+    prodotti: [],
+    id_indirizzo: ''},
+
+    {nome: 'OFFICINA',
+    id_esercente: '',
+    p_iva: '',
+    prodotti: [],
+    id_indirizzo: ''}
+  ];*/
 
   constructor(
     public navCtrl: NavController,
@@ -109,9 +151,18 @@ export class LoginPage implements OnInit {
 
   goToHome() {
   // firebase.initializeApp(environment.firebase);
-  const geo = GeoFire.init(firebase);
-  this.negozio.id_indirizzo = geo.point(40.807904, 14.621987);
-  this.service.addNegozio(this.negozio);
+  /*const geo = GeoFire.init(firebase);
+  this.negozi[0].id_indirizzo = geo.point(40.7709885, 14.7981127);
+  this.negozi[1].id_indirizzo = geo.point(40.7710536, 14.797461);
+  this.negozi[2].id_indirizzo = geo.point(40.7709146, 14.7982666);
+  this.negozi[3].id_indirizzo = geo.point(40.7716727, 14.7969504);
+  this.negozi[4].id_indirizzo = geo.point(40.6786549, 14.7579052);
+  this.negozi[5].id_indirizzo = geo.point(40.6792604, 14.7529254);
+  this.negozi[6].id_indirizzo = geo.point(40.6792401, 14.7525687);
+  this.negozi[7].id_indirizzo = geo.point(40.6814556, 14.7659691);
+  this.negozi.forEach(element => {
+    this.service.addNegozio(element);
+  });*/
 
 
   this.auth.goToHome(this.user).subscribe(user => {

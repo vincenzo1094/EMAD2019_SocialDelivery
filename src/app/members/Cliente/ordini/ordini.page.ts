@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-ordini',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrdiniPage implements OnInit {
 
-  constructor() { }
+  constructor(public navCtrl: NavController) { }
 
   ngOnInit() {
+  }
+
+  viewNegozi(){
+    this.navCtrl.navigateRoot('/tabsCliente/negozi');
+  }
+
+  viewImpostazioni(){
+    this.navCtrl.navigateRoot('/tabsCliente/impostazioni');
+  }
+
+  viewPreferiti(){
+    this.navCtrl.navigateRoot('/tabsCliente/preferiti');
   }
 
 }
