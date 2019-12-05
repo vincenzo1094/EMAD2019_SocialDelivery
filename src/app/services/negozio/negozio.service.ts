@@ -3,7 +3,7 @@ import {Negozio} from '../../interface/negozio';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import * as GeoFire from "geofirex";
+import * as GeoFire from 'geofirex';
 import * as firebase from 'firebase/app';
 
 @Injectable({
@@ -15,10 +15,10 @@ export class NegozioService {
 
   private negozio: Observable<Negozio[]>;
 
-  
 
-  constructor(db: AngularFirestore,){
-    
+
+  constructor(db: AngularFirestore, ) {
+
     this.negozioCollection = db.collection<Negozio>('negozi');
 
     this.negozio = this.negozioCollection.snapshotChanges().pipe(
@@ -40,10 +40,10 @@ export class NegozioService {
     return this.negozioCollection.doc<Negozio>(id).valueChanges();
   }
 
-  getGeoQueryNegozi(lan: number, lon: number){
+  getGeoQueryNegozi(lan: number, lon: number) {
     const geo = GeoFire.init(firebase);
     const center = geo.point(lan, lon);
-    const radius = 30;
+    const radius = 3;
     const field = 'id_indirizzo';
 
     const query = geo.query('negozi').within(center, radius, field);

@@ -37,8 +37,8 @@ export class NegoziPage implements OnInit, AfterViewInit {
 
       const map = new google.maps.Map(this.mapNativeElement.nativeElement, {
         center: {lat: -34.397,  lng: 150.644},
-        zoom: 10,
-        // disableDefaultUI: true
+        zoom: 16,
+        disableDefaultUI: true
       });
 
       /*location object*/
@@ -47,7 +47,7 @@ export class NegoziPage implements OnInit, AfterViewInit {
         lng: this.longitude
       };
       map.setCenter(pos);
-    
+
       const icon = {
         url: 'assets/icon/u.png', // image url
         scaledSize: new google.maps.Size(40, 40), // scaled size
@@ -64,37 +64,42 @@ export class NegoziPage implements OnInit, AfterViewInit {
       this.serveNegozi.getGeoQueryNegozi(this.latitude, this.longitude).subscribe(res =>
         res.forEach(element => {
           console.log(element);
+          // tslint:disable-next-line: no-shadowed-variable
           const pos = {
+            // tslint:disable-next-line: no-string-literal
             lat: element['id_indirizzo'].geopoint.latitude,
+            // tslint:disable-next-line: no-string-literal
             lng: element['id_indirizzo'].geopoint.longitude
           };
 
+          // tslint:disable-next-line: no-shadowed-variable
           const icon = {
             url: 'assets/icon/s.png', // image url
             scaledSize: new google.maps.Size(40, 40), // scaled size
           };
 
+          // tslint:disable-next-line: no-shadowed-variable
           const marker = new google.maps.Marker({
             position: pos,
             map,
             title: 'Shop',
             icon
           });
-          marker.addListener('click', ()=>{
-            let navigationExtras: NavigationExtras = {
+          marker.addListener('click', () => {
+            const navigationExtras: NavigationExtras = {
               queryParams: {
                   negozio: element
               }
           };
-          this.router.navigate(['tabsCliente/ordini'], navigationExtras);
+            this.router.navigate(['tabsCliente/ordini'], navigationExtras);
           });
         }));
-         
-      // map.setMapTypeId('roadmap');
+
+      //map.setMapTypeId('roadmap');
     }).catch((error) => {
       console.log('Error getting location', error);
     });
-  
+
   }
 
 
@@ -103,7 +108,7 @@ export class NegoziPage implements OnInit, AfterViewInit {
   }
 
   viewNegozi() {}
-  
+
   viewImpostazioni() {
     this.navCtrl.navigateRoot('/tabsCliente/impostazioni');
   }
