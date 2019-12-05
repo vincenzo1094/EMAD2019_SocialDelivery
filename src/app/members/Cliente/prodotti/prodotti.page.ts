@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Prodotto } from 'src/app/interface/prodotto';
 import { TouchSequence } from 'selenium-webdriver'
 import {ProdottoService} from './../../../services/prodotto/prodotto.service';
+import { NavController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-prodotti',
@@ -14,18 +16,20 @@ export class ProdottiPage implements OnInit {
   products : Prodotto[] = [];
   prodotto: Prodotto;
 
-  provaProdotto = ["568dWqrGvo8tFsOWrsE2","FcZs4QIShaABKZnKemJP","ZBkXgbom9lp57z1Kv4FL","oTedl9qwETAvy2ItMj7H"];
-
-  constructor(prodService: ProdottoService) { 
-    this.getProducts(prodService);
+  constructor(private prodService: ProdottoService,public navCtrl: NavController, private route: ActivatedRoute) { 
+    
   }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(async params => {
+      this.getProducts(params["prodotti"]);
+    });
   }
 
-  getProducts(prodService: ProdottoService){
-    for(let id of this.provaProdotto){
-      prodService.getProdotto(id).subscribe(res => {
+  getProducts(products: [string]){
+    for(let id of products){
+      console.log(id);
+      this.prodService.getProdotto(id).subscribe(res => {
         this.prodotto = res;
         this.products.push(this.prodotto);
       })
@@ -36,6 +40,21 @@ export class ProdottiPage implements OnInit {
     
   }
 
-  
+  viewOrdini(){
+    this.navCtrl.navigateRoot('/tabsCliente/ordini');
+  }
+
+  viewImpostazioni(){
+    this.navCtrl.navigateRoot('/tabsCliente/impostazioni');
+  }
+
+  viewPreferiti(){
+    this.navCtrl.navigateRoot('/tabsCliente/preferiti');
+  }
+
+  viewNegozi(){
+    this.navCtrl.navigateRoot('/tabsCliente/negozi');
+  }
+
 
 }

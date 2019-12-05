@@ -5,6 +5,10 @@ import { NavController, MenuController, ToastController, AlertController, Loadin
 import { AuthService } from 'src/app/services/auth.service';
 import {Cliente} from './../../interface/cliente';
 import {ClienteService} from './../../services/cliente/cliente.service';
+import {Prodotto} from './../../interface/prodotto';
+import { Mezzo } from 'src/app/interface/mezzo';
+import {ProdottoService} from './../../services/prodotto/prodotto.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -68,12 +72,7 @@ export class LoginPage implements OnInit {
     prodotti: [],
     id_indirizzo: ''}
   ];*/
-
-  cliente: Cliente={
-    nome:'Enzo',
-    cognome:'tata',
-    email:'dioporco@madonna.it'
-  };
+  
 
   constructor(
     public navCtrl: NavController,
@@ -83,7 +82,8 @@ export class LoginPage implements OnInit {
     public loadingCtrl: LoadingController,
     private formBuilder: FormBuilder,
     private auth: AuthService,
-    private serve: ClienteService ) { }
+    private serve: ClienteService,
+    private prodService: ProdottoService ) { }
 
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
@@ -176,6 +176,7 @@ export class LoginPage implements OnInit {
 
       if (role === 'cliente') {
         
+
         this.navCtrl.navigateRoot('/tabsCliente/negozi');
 
       } else if (role === 'driver') {
