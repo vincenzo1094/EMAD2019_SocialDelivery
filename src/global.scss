@@ -23,14 +23,64 @@ ion-item {
   margin: 0 5%;
 
   .logo {
-    width: 100px;
-    height: 100px;
+    width: 140px;
+    height: 150px;
     margin: 20px auto 8px;
     //border-radius: 10%;
-    background: url("/assets/img/logoapp.jpg") no-repeat;
+    background: url("/assets/icon/l3.png") no-repeat;
     background-size: 100%;
   }
 }
+// Helpers //
+.w100 {
+  width: 100%;
+}
+
+.bold,
+.fw500 {
+    font-weight: 500 !important;
+}
+
+.fw700 {
+    font-weight: 700 !important;
+}
+
+.text08 {
+  font-size: .8rem;
+}
+
+.text1 {
+  font-size: 1rem !important;
+}
+
+.text12 {
+  font-size: 1.2rem;
+}
+
+.text15 {
+  font-size: 1.5rem;
+}
+
+.text20 {
+  font-size: 2rem;
+}
+
+.text-white {
+    color: #fff;
+}
+
+.text-primary {
+    color: var(--ion-color-primary);
+}
+
+.text-secondary {
+  color: var(--ion-color-secondary);
+}
+
+.text-dark {
+  color: rgb(0, 0, 0);
+}
+
 /*
 // backgrounds //
 .bg-white {

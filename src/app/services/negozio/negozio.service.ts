@@ -43,7 +43,7 @@ export class NegozioService {
   getGeoQueryNegozi(lan: number, lon: number) {
     const geo = GeoFire.init(firebase);
     const center = geo.point(lan, lon);
-    const radius = 3;
+    const radius = 30;
     const field = 'id_indirizzo';
 
     const query = geo.query('negozi').within(center, radius, field);
