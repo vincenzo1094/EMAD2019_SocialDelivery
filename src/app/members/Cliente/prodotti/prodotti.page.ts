@@ -40,6 +40,21 @@ export class ProdottiPage implements OnInit {
     
   }
 
-  
+  viewOrdini(){
+    this.navCtrl.navigateRoot('/tabsCliente/ordini');
+  }
+
+  viewImpostazioni(){
+    this.navCtrl.navigateRoot('/tabsCliente/impostazioni');
+  }
+
+  viewPreferiti(){
+    this.navCtrl.navigateRoot('/tabsCliente/preferiti');
+  }
+
+  viewNegozi(){
+    this.navCtrl.navigateRoot('/tabsCliente/negozi');
+  }
+
 
 }
