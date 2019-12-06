@@ -40,10 +40,11 @@ export class ClienteService {
   }
 
   addCliente(cliente: Cliente) {
-    let a = this.clienteCollection.add(cliente);
-    a.then(function(id){
+    const a = this.clienteCollection.add(cliente);
+    // tslint:disable-next-line: only-arrow-functions
+    a.then( function(id) {
       console.log(id.id);
-    })
+    });
     return a;
   }
 
