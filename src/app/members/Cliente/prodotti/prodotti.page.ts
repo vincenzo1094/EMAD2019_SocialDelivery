@@ -4,6 +4,8 @@ import { TouchSequence } from 'selenium-webdriver'
 import {ProdottoService} from './../../../services/prodotto/prodotto.service';
 import { NavController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
+import { NavigationExtras } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-prodotti',
@@ -16,7 +18,7 @@ export class ProdottiPage implements OnInit {
   products : Prodotto[] = [];
   prodotto: Prodotto;
 
-  constructor(private prodService: ProdottoService,public navCtrl: NavController, private route: ActivatedRoute) { 
+  constructor(private prodService: ProdottoService,public navCtrl: NavController, private route: ActivatedRoute, private router: Router) { 
     
   }
 
@@ -28,7 +30,6 @@ export class ProdottiPage implements OnInit {
 
   getProducts(products: [string]){
     for(let id of products){
-      console.log(id);
       this.prodService.getProdotto(id).subscribe(res => {
         this.prodotto = res;
         this.products.push(this.prodotto);
@@ -36,8 +37,13 @@ export class ProdottiPage implements OnInit {
     }
   }
 
-  listElementClicked(){
-    
+  listElementClicked(prod: Prodotto){
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+          p: prod.nome
+      }
+    };
+    this.router.navigate(['/tabsCliente/dettagli'], navigationExtras);
   }
 
   viewOrdini(){

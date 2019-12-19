@@ -11,10 +11,7 @@
 
 <ion-content>
     <ion-list>
-        <ion-item button (click)="listElementClicked()" *ngFor="let p of products">
-          <ion-avatar>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Circle-icons-dolly.svg">
-          </ion-avatar>
+        <ion-item button *ngFor="let p of products" (click)="listElementClicked(p)">
           <ion-label class= "name_label"padding > 
               {{p.nome}}
           </ion-label>
@@ -37,23 +34,23 @@
       <ion-grid>
         <ion-row>
           <ion-col>
-      <ion-button (click)="viewPreferiti()">
+      <ion-button color="dark" (click)="viewPreferiti()">
         <ion-icon slot="icon-only" name="bookmark"></ion-icon>
       </ion-button>
     </ion-col>
     <ion-col>
-      <ion-button (click)="viewNegozi()">
+      <ion-button color="dark" (click)="viewNegozi()">
           <ion-icon slot="icon-only" name="map"></ion-icon>
       </ion-button>
     </ion-col>
     <ion-col>
-      <ion-button (click)="viewOrdini()">
+      <ion-button color="dark" (click)="viewOrdini()">
         <ion-icon slot="icon-only" name="locate"></ion-icon>
       </ion-button>
     </ion-col>
 
     <ion-col>
-      <ion-button (click)="viewImpostazioni()">
+      <ion-button color="dark" (click)="viewImpostazioni()">
         <ion-icon slot="icon-only" name="settings"></ion-icon>
       </ion-button>
     </ion-col>
