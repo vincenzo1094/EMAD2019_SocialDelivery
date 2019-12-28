@@ -1,8 +1,9 @@
 <ion-header>
   <ion-toolbar>
       <ion-buttons slot="end">
-          <ion-button>
-            <ion-icon slot="icon-only" name="cart"></ion-icon>
+          <ion-button (click)="cartButtonPressed()">
+            <ion-icon name="cart"></ion-icon>
+            <ion-badge color="primary">{{productsInCart.size}}</ion-badge>
           </ion-button>
         </ion-buttons>
     <ion-title>Vetrina Negozio</ion-title>
@@ -11,7 +12,7 @@
 
 <ion-content>
     <ion-list>
-        <ion-item button *ngFor="let p of products" (click)="listElementClicked(p)">
+        <ion-item *ngFor="let p of products" (click)="listElementClicked(p)">
           <ion-label class= "name_label"padding > 
               {{p.nome}}
           </ion-label>
@@ -21,7 +22,7 @@
           <ion-label class= "prezzo_label">
             € {{p.prezzo}}
           </ion-label>
-          <ion-button>
+          <ion-button (click)="plusButtonPressed(p);$event.stopPropagation();">
             <ion-icon name="add-circle-outline"></ion-icon>
           </ion-button>
         </ion-item>

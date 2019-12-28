@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
 import { Prodotto } from 'src/app/interface/prodotto';
 import { TouchSequence } from 'selenium-webdriver'
 import {ProdottoService} from './../../../services/prodotto/prodotto.service';
@@ -17,6 +17,7 @@ export class ProdottiPage implements OnInit {
   shop = '';
   products : Prodotto[] = [];
   prodotto: Prodotto;
+  productsInCart = new Set();
 
   constructor(private prodService: ProdottoService,public navCtrl: NavController, private route: ActivatedRoute, private router: Router) { 
     
@@ -32,6 +33,7 @@ export class ProdottiPage implements OnInit {
     for(let id of products){
       this.prodService.getProdotto(id).subscribe(res => {
         this.prodotto = res;
+        this.prodotto.id = id;
         this.products.push(this.prodotto);
       })
     }
@@ -40,11 +42,29 @@ export class ProdottiPage implements OnInit {
   listElementClicked(prod: Prodotto){
     const navigationExtras: NavigationExtras = {
       queryParams: {
-          p: prod.nome
+          prodID: prod.id
       }
     };
     this.router.navigate(['/tabsCliente/dettagli'], navigationExtras);
   }
+
+  cartButtonPressed() {
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+          elements: this.productsInCart
+      }
+    };
+    this.router.navigate(['/tabsCliente/carrello'], navigationExtras);
+  }
+
+  plusButtonPressed(prod: Prodotto){
+    if(this.productsInCart.has(prod)){
+    }
+    else{
+      this.productsInCart.add(prod);
+    }
+  }
+
 
   viewOrdini(){
     this.navCtrl.navigateRoot('/tabsCliente/ordini');
