@@ -28,8 +28,7 @@ export class ProdottoService {
   }
 
   getProdotto(id){
-    return this.prodottiCollection.doc<Prodotto>(id).valueChanges();
-      
+    return this.prodottiCollection.doc<Prodotto>(id).valueChanges();   
   }
 
   addProdotto(prodotto: Prodotto) {
