@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Prodotto } from 'src/app/interface/prodotto';
 import { ActivatedRoute } from '@angular/router';
+import {ProdottoService} from './../../../services/prodotto/prodotto.service';
 
 @Component({
   selector: 'app-dettagli',
@@ -9,14 +10,25 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DettagliPage implements OnInit {
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute,private prodService: ProdottoService) {
+    
+   }
 
-  prodotto: Prodotto;
+  prodotto: Prodotto = {
+    id:null,
+    nome:null,
+    descrizione:null,
+    prezzo:null,
+    quantita:null,
+    mezzo:null};
 
   ngOnInit() {
     this.route.queryParams.subscribe(async params => {
-      const a = params['p'];
-      console.log(a);
+      const id = params['prodID'];
+      this.prodService.getProdotto(id).subscribe(res => {
+        this.prodotto = res;
+        this.prodotto.id = id;
+      })
     });
   }
 
@@ -24,8 +36,8 @@ export class DettagliPage implements OnInit {
     this.goToAddProductForm();
   }
 
-  private async goToAddProductForm(){
-    
+  private async goToAddProductForm() {
+  
   }
 
 
