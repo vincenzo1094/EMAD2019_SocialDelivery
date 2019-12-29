@@ -181,11 +181,11 @@ export class LoginPage implements OnInit {
 
       } else if (role === 'driver') {
 
-        this.navCtrl.navigateRoot('/tabsDriver');
+        this.navCtrl.navigateRoot('/tabsDriver/spedizioni');
 
       } else if (role === 'esercente') {
 
-        this.navCtrl.navigateRoot('/tabsEsercente');
+        this.navCtrl.navigateRoot('/tabsEsercente/ordini');
       }
     });
   }

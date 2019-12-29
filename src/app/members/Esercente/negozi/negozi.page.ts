@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-negozi',
@@ -9,7 +10,7 @@ export class NegoziPage implements OnInit {
 
   shops = ['Negozio1', 'Negozio2', 'Negozio3', 'Negozio4'];
 
-  constructor() { }
+  constructor(public navCtrl: NavController) { }
 
   ngOnInit() {
   }
@@ -28,6 +29,18 @@ export class NegoziPage implements OnInit {
 
   private goToShopWindow(shop:string){
     
+  }
+
+  viewOrdini(){
+    this.navCtrl.navigateRoot('/tabsEsercente/ordini');
+  }
+
+  viewNegozi(){
+    this.navCtrl.navigateRoot('/tabsEsercente/negozi');
+  }
+
+  viewImpostazioni(){
+    this.navCtrl.navigateRoot('/tabsEsercente/impostazioni');
   }
 
 }
