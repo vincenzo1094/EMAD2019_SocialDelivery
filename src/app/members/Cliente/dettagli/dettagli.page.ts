@@ -20,6 +20,7 @@ export class DettagliPage implements OnInit {
     descrizione:null,
     prezzo:null,
     quantita:null,
+    quantitaCarrello: null,
     mezzo:null};
 
   ngOnInit() {

@@ -7,5 +7,6 @@ export interface Prodotto {
     descrizione?: string;
     prezzo: number;
     quantita: number;
+    quantitaCarrello: number;
     mezzo: Mezzo;
   }

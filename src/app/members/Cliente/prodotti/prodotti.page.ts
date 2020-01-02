@@ -6,22 +6,27 @@ import { NavController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { NavigationExtras } from '@angular/router';
 import { Router } from '@angular/router';
+import { NavExtrasService } from 'src/app/interface/NavExtraService';
+
 
 @Component({
   selector: 'app-prodotti',
   templateUrl: './prodotti.page.html',
   styleUrls: ['./prodotti.page.scss'],
 })
-export class ProdottiPage implements OnInit {
+export class ProdottiPage implements OnInit{
 
   shop = '';
   products : Prodotto[] = [];
   prodotto: Prodotto;
-  productsInCart = new Set();
+  
 
-  constructor(private prodService: ProdottoService,public navCtrl: NavController, private route: ActivatedRoute, private router: Router) { 
+  constructor(private prodService: ProdottoService,public navCtrl: NavController, private route: ActivatedRoute, private router: Router, private navExtra: NavExtrasService) { 
     
   }
+
+  
+  
 
   ngOnInit() {
     this.route.queryParams.subscribe(async params => {
@@ -29,13 +34,19 @@ export class ProdottiPage implements OnInit {
     });
   }
 
+
+  
+
   getProducts(products: [string]){
-    for(let id of products){
-      this.prodService.getProdotto(id).subscribe(res => {
-        this.prodotto = res;
-        this.prodotto.id = id;
-        this.products.push(this.prodotto);
-      })
+    if(this.products.length == 0) {
+      for(let id of products){
+        this.prodService.getProdotto(id).subscribe(res => {
+          this.prodotto = res;
+          this.prodotto.id = id;
+          this.prodotto.quantitaCarrello = 0;
+          this.products.push(this.prodotto);
+        })
+      }
     }
   }
 
@@ -49,20 +60,20 @@ export class ProdottiPage implements OnInit {
   }
 
   cartButtonPressed() {
-    const navigationExtras: NavigationExtras = {
-      queryParams: {
-          elements: this.productsInCart
-      }
-    };
-    this.router.navigate(['/tabsCliente/carrello'], navigationExtras);
+    this.navExtra.setExtras(this.products);
+    this.navCtrl.navigateForward('/tabsCliente/carrello');
   }
 
-  plusButtonPressed(prod: Prodotto){
-    if(this.productsInCart.has(prod)){
+  plusButtonPressed(index: number){
+    this.products[index].quantitaCarrello = this.products[index].quantitaCarrello + 1;
+  }
+
+  getTotalProductsInTheCart() {
+    var sum = 0;
+    for (let p of this.products) {
+      sum = sum + p.quantitaCarrello;
     }
-    else{
-      this.productsInCart.add(prod);
-    }
+    return sum;
   }
 
 

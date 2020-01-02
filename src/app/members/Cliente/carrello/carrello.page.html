@@ -3,12 +3,34 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>
-      Carrello
-    </ion-title>
+    <ion-title>Carrello</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+    <ion-list>
+        <ion-item *ngFor="let p of productsInCart; let i = index">
+          <ion-label class= "name_label"padding > 
+              {{p.nome}}
+          </ion-label>
+          <ion-input>{{p.quantitaCarrello}}</ion-input>
+          <ion-label class= "prezzo_label">
+            € {{p.prezzo*p.quantitaCarrello}}
+          </ion-label>
+          <ion-button (click)="removeButtonPressed(i);$event.stopPropagation();">
+            <ion-icon name="remove-circle"></ion-icon>
+          </ion-button>
+        </ion-item>
+        <ion-item *ngIf="productsInCart.length == 0">
+          Carrello Vuoto
+        </ion-item>
+    </ion-list>
+    <ion-label class = "totaleLabel">Totale: € {{getTotale()}}</ion-label>
+    <ion-button icon-left size="medium" expand="full" shape="round" color="primary" (click)="pagaPressed()" [disabled]="productsInCart.length == 0" tappable>
+      <ion-icon name="log-in"></ion-icon>
+      PAGA
+    </ion-button>
 </ion-content>
+<ion-footer>
+
+</ion-footer>
