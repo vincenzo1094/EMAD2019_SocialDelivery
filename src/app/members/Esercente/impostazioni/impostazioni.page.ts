@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-impostazioni',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ImpostazioniPage implements OnInit {
 
-  constructor() { }
+  constructor(public navCtrl: NavController) { }
 
   ngOnInit() {
   }
 
+  viewOrdini(){
+    this.navCtrl.navigateRoot('/tabsEsercente/ordini');
+  }
+
+  viewNegozi(){
+    this.navCtrl.navigateRoot('/tabsEsercente/negozi');
+  }
+
+  viewImpostazioni(){
+    this.navCtrl.navigateRoot('/tabsEsercente/impostazioni');
+  }
 }

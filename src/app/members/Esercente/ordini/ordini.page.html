@@ -1,9 +1,39 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>ordini</ion-title>
+     
+  <ion-title>
+    Ordini
+  </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+
+    <ion-buttons > 
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+      <ion-button (click)="viewOrdini()">
+        <ion-icon slot="icon-only" name="pricetags"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button (click)="viewNegozi()">
+          <ion-icon slot="icon-only" name="briefcase"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button (click)="viewImpostazioni()">
+        <ion-icon slot="icon-only" name="settings"></ion-icon>
+      </ion-button>
+    </ion-col>
+    </ion-row>
+    </ion-grid>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-footer>
