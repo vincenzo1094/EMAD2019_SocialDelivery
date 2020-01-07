@@ -19,7 +19,7 @@ export class ProdottiPage implements OnInit{
   shop = '';
   products : Prodotto[] = [];
   prodotto: Prodotto;
-  
+  negozio: String;
 
   constructor(private prodService: ProdottoService,public navCtrl: NavController, private route: ActivatedRoute, private router: Router, private navExtra: NavExtrasService) { 
     
@@ -31,6 +31,7 @@ export class ProdottiPage implements OnInit{
   ngOnInit() {
     this.route.queryParams.subscribe(async params => {
       this.getProducts(params["prodotti"]);
+      this.negozio = params["negozio"];
     });
   }
 
@@ -60,7 +61,10 @@ export class ProdottiPage implements OnInit{
   }
 
   cartButtonPressed() {
-    this.navExtra.setExtras(this.products);
+    const data: any[] = [];
+    data.push(this.products);
+    data.push(this.negozio);
+    this.navExtra.setExtras(data);
     this.navCtrl.navigateForward('/tabsCliente/carrello');
   }
 

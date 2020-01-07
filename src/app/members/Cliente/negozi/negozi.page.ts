@@ -88,7 +88,8 @@ export class NegoziPage implements OnInit, AfterViewInit {
           marker.addListener('click', () => {
             const navigationExtras: NavigationExtras = {
               queryParams: {
-                  prodotti: element['prodotti']
+                  prodotti: element['prodotti'],
+                  negozio: element['id']
               }
           };
           this.router.navigate(['tabsCliente/prodotti'], navigationExtras);
@@ -104,7 +105,7 @@ export class NegoziPage implements OnInit, AfterViewInit {
 
 
   viewOrdini() {
-    this.navCtrl.navigateRoot('/tabsCliente/prodotti');
+    this.navCtrl.navigateRoot('/tabsCliente/ordini');
   }
 
   viewNegozi() {}
