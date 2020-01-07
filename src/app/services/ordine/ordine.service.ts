@@ -18,6 +18,13 @@ export class OrdineService {
     return this.ordiniCollection.doc<Ordine>(id).valueChanges();   
   }
 
+  getOrdiniOf(cliente) {
+    // DAMMI TUTTI GLI ORDINI DEL CLIENTE
+    //TUTTI GLI ORDINI WHERE CLIENTE = cliente (variabile in input al metodo)
+    
+    
+  }
+
   addOrdine(ordine: Ordine) {
     return this.ordiniCollection.add(ordine);
   }
