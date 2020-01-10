@@ -98,11 +98,6 @@ export class CarrelloPage implements OnInit {
     });
 
     await alert.present();
-  }
-
-
-  
-
-  
+  } 
 
 }

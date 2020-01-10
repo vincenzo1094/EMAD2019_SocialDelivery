@@ -3,7 +3,8 @@ import { Driver } from 'src/app/interface/driver';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {Ordine} from 'src/app/interface/ordine';
+import { Platform } from '@ionic/angular';
+import { Firebase } from '@ionic-native/firebase/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,9 @@ export class DriverService {
 
   private cliente: Observable<Driver[]>;
 
-  constructor(db: AngularFirestore) {
+  constructor(private db: AngularFirestore,
+              private firebase: Firebase,
+              private platform: Platform) {
     this.driverCollection = db.collection<Driver>('drivers');
 
     this.cliente = this.driverCollection.snapshotChanges().pipe(
@@ -29,6 +32,18 @@ export class DriverService {
   }
 
   addDriver(driver: Driver) {
+
+    if (this.platform.is('android')) {
+      driver.token = this.firebase.getToken();
+    }
+
+    if (this.platform.is('ios')) {
+      driver.token = this.firebase.getToken();
+      this.firebase.grantPermission();
+    }
+    if (this.platform.is('desktop')) {
+      driver.token = 'desktop';
+    }
     const a = this.driverCollection.add(driver);
     // tslint:disable-next-line: only-arrow-functions
     a.then( function(id) {
@@ -36,4 +51,9 @@ export class DriverService {
     });
     return a;
   }
+
+  onNotifications() {
+    return this.firebase.onNotificationOpen();
+  }
+  
 }

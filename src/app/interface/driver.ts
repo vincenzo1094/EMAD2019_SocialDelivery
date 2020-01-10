@@ -1,5 +1,6 @@
 export interface Driver {
     id?: string;
+    token?;
     nome?: string;
     cognome?: string;
     email?: string;
