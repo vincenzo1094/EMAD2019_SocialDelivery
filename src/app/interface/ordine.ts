@@ -6,6 +6,7 @@ export interface Ordine {
     id?: string;
     stato: stato_ordine;
     id_negozio: string;
+    id_cliente: string;
     id_spedizione?: string;
     prodotti?: ProdottoOrdine[];
     totale?: number;
