@@ -15,7 +15,12 @@ import {DriverService} from 'src/app/services/driver/driver.service';
 })
 export class RegisterPage implements OnInit {
 
-  constructor(private regService: RegistrazioneService,public alertController: AlertController, public loadingController: LoadingController,private clienteService: ClienteService,private driverService: DriverService,private navCtrl: NavController) {}
+  constructor(private regService: RegistrazioneService,
+              public alertController: AlertController,
+              public loadingController: LoadingController,
+              private clienteService: ClienteService,
+              private driverService: DriverService,
+              private navCtrl: NavController) {}
 
   tipoValue: string = "Cliente";
   message: string = '';
@@ -29,11 +34,8 @@ export class RegisterPage implements OnInit {
     }
     else {this.tipoValue = "Cliente";}
   }
-  
-  
 
   registerPressed() {
-    
     let tipoAcc = this.tipoValue;
     let nome = (<HTMLInputElement>document.getElementById('nome')).value;
     let cognome = (<HTMLInputElement>document.getElementById('cognome')).value;

@@ -74,6 +74,7 @@ export class CarrelloPage implements OnInit {
     const newOrder: Ordine = {
       stato: stato_ordine.ATTESA,
       id_negozio: this.idNegozio,
+      id_cliente: "cliente",
       prodotti: prods,
       totale:this.getTotale()}; 
     
