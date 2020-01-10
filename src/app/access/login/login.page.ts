@@ -170,24 +170,6 @@ export class LoginPage implements OnInit {
 
 
 
-  this.auth.goToHome(this.user).subscribe(user => {
-
-      const role = user.role;
-
-      if (role === 'cliente') {
-        
-
-        this.navCtrl.navigateRoot('/tabsCliente/negozi');
-
-      } else if (role === 'driver') {
-
-        this.navCtrl.navigateRoot('/tabsDriver/spedizioni');
-
-      } else if (role === 'esercente') {
-
-        this.navCtrl.navigateRoot('/tabsEsercente/ordini');
-      }
-    });
-  }
+}
 
 }
