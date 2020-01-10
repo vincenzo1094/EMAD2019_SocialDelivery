@@ -7,11 +7,30 @@ import { Ordine } from 'src/app/interface/ordine';
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class OrdineService {
+  
   private ordiniCollection: AngularFirestoreCollection<Ordine>;
+  
+  private ordine: Observable<Ordine[]>;
 
   constructor(db: AngularFirestore) {
     this.ordiniCollection = db.collection<Ordine>('ordini');
+
+    this.ordine = this.ordiniCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );
+  }
+
+  getOrdini(){
+    return this.ordine;
   }
 
   getOrdine(id){

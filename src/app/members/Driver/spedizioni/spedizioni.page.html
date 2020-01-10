@@ -1,10 +1,21 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>spedizioni</ion-title>
+    <ion-title>Spedizioni</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-list>
+    <ion-item (click)="presentActionSheet()" *ngFor="let item of ordine">
+      <ion-avatar slot="start">
+        <img src="https://png.pngtree.com/png-clipart/20190604/original/pngtree-car-sets-png-image_1291357.jpg">
+      </ion-avatar>
+      <ion-label>
+        <h3>{{item.id_negozio}}</h3>
+            <p>Send: {{item.id_cliente}}</p>
+      </ion-label> 
+    </ion-item>
+  </ion-list>
 
 </ion-content>
 

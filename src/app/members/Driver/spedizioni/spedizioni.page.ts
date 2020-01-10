@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { ActionSheetController } from '@ionic/angular';
+import {OrdineService} from '../../../services/ordine/ordine.service';
+import {Ordine} from '../../../interface/ordine';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-spedizioni',
@@ -8,12 +12,45 @@ import { NavController } from '@ionic/angular';
 })
 export class SpedizioniPage implements OnInit {
 
-  constructor(public navCtrl: NavController) { }
+  public ordine: Ordine[];
 
+
+  constructor(public navCtrl: NavController, 
+              public actionSheetController: ActionSheetController,
+              public ordineService: OrdineService) { }
+  
   ngOnInit() {
+   this.ordineService.getOrdini().subscribe(res => {
+    this.ordine = res;
+   });
   }
 
-
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Actions',
+      buttons: [{
+        text: 'Accetta',
+        icon: 'checkmark-circle-outline',
+        handler: () => {
+          console.log('Share clicked');
+        }
+      }, {
+        text: 'Rifiuta',
+        icon: 'close-circle-outline',
+        handler: () => {
+          console.log('Play clicked');
+        }
+      }, {
+        text: 'Dettagli',
+        icon: 'information-circle-outline',
+        handler: () => {
+          console.log('Favorite clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
+  }
+  
   viewSpedizioni(){
     this.navCtrl.navigateRoot('/tabsDriver/spedizioni');
   }

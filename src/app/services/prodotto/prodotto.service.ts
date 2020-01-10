@@ -11,12 +11,12 @@ import { map } from 'rxjs/operators';
 export class ProdottoService {
   private prodottiCollection: AngularFirestoreCollection<Prodotto>;
 
-  private cliente: Observable<Prodotto[]>;
+  private prodotto: Observable<Prodotto[]>;
 
   constructor(db: AngularFirestore) {
     this.prodottiCollection = db.collection<Prodotto>('prodotti');
 
-    this.cliente = this.prodottiCollection.snapshotChanges().pipe(
+    this.prodotto = this.prodottiCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
           const data = a.payload.doc.data();
@@ -25,6 +25,10 @@ export class ProdottoService {
         });
       })
     );
+  }
+
+  getProdotti(){
+    return this.prodotto;
   }
 
   getProdotto(id){
