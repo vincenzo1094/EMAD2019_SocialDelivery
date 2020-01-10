@@ -3,6 +3,7 @@ import {Cliente} from '../../interface/cliente';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import {Ordine} from 'src/app/interface/ordine';
 
 @Injectable({
   providedIn: 'root'
@@ -51,4 +52,6 @@ export class ClienteService {
   removeCliente(id) {
     return this.clienteCollection.doc(id).delete();
   }
+
+  
 }

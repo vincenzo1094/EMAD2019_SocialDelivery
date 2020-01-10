@@ -1,11 +1,14 @@
 import {Negozio} from './negozio';
+import { Ordine } from './ordine';
 
 export interface Cliente {
     id?: string;
-    nome: string;
-    cognome: string;
-    email: string;
+    nome?: string;
+    cognome?: string;
+    email?: string;
+    citta?: string;
+    indirizzo?: string;
     avatar?: string;
-    id_ordine?: string;
+    ordini?: Ordine[];
     preferiti?: Negozio[];
   }
