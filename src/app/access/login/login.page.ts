@@ -8,6 +8,8 @@ import {ClienteService} from './../../services/cliente/cliente.service';
 import {Prodotto} from './../../interface/prodotto';
 import { Mezzo } from 'src/app/interface/mezzo';
 import {ProdottoService} from './../../services/prodotto/prodotto.service';
+import {RegistrazioneService} from 'src/app/services/registrazione/registrazione.service';
+
 
 @Component({
   selector: 'app-login',
@@ -83,7 +85,9 @@ export class LoginPage implements OnInit {
     private formBuilder: FormBuilder,
     private auth: AuthService,
     private serve: ClienteService,
-    private prodService: ProdottoService ) { }
+    private prodService: ProdottoService,
+    private regService: RegistrazioneService,
+    public alertController: AlertController) { }
 
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
@@ -152,24 +156,35 @@ export class LoginPage implements OnInit {
   }
 
   goToHome() {
-  // firebase.initializeApp(environment.firebase);
-  /*const geo = GeoFire.init(firebase);
-  this.negozi[0].id_indirizzo = geo.point(40.7709885, 14.7981127);
-  this.negozi[1].id_indirizzo = geo.point(40.7710536, 14.797461);
-  this.negozi[2].id_indirizzo = geo.point(40.7709146, 14.7982666);
-  this.negozi[3].id_indirizzo = geo.point(40.7716727, 14.7969504);
-  this.negozi[4].id_indirizzo = geo.point(40.6786549, 14.7579052);
-  this.negozi[5].id_indirizzo = geo.point(40.6792604, 14.7529254);
-  this.negozi[6].id_indirizzo = geo.point(40.6792401, 14.7525687);
-  this.negozi[7].id_indirizzo = geo.point(40.6814556, 14.7659691);
-  this.negozi.forEach(element => {
-    this.service.addNegozio(element);
-  });*/
-  //this.serve.addCliente(this.cliente);
+    let email = (<HTMLInputElement>document.getElementById('email')).value;
+    let pass = (<HTMLInputElement>document.getElementById('pass')).value;
+    this.regService.login(email,pass)
+      .then(() => {
+        this.serve.exists(email);
+        //this.navCtrl.navigateForward('tabsCliente/negozi');
+        //else if esiste in driver andiamo in driver
+      })
+      .catch((err) =>{
+        this.presentAlert('Error',err.message);
+      })
+  }
 
 
+  async presentAlert(header:string,message: string) {
+    const alert = await this.alertController.create({
+      header: header,
+      subHeader: '',
+      message: message,
+      buttons: [{
+        text: 'OK',
+        handler: () => {
+          if(message == 'Registrazione avvenuta correttamente') {
+            this.navCtrl.navigateForward('tabsCliente/negozi');
+          }
+        }
+      }]
+    });
 
-
-}
-
+    await alert.present();
+  }
 }

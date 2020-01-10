@@ -36,6 +36,7 @@
     "firebase": "^7.5.0",
     "geofirex": "^0.1.0",
     "geolocation": "^0.2.0",
+    "ngx": "^2.4.0",
     "rxjs": "^6.5.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"

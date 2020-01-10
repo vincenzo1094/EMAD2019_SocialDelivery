@@ -24,6 +24,12 @@ export class RegisterPage implements OnInit {
 
   tipoValue: string = "Cliente";
   message: string = '';
+  email: string = '';
+  password: string = '';
+  citta: string = '';
+  indirizzo: string = '';
+  nome: string = '';
+  cognome: string = '';
 
   ngOnInit() {
   }
@@ -37,42 +43,41 @@ export class RegisterPage implements OnInit {
 
   registerPressed() {
     let tipoAcc = this.tipoValue;
-    let nome = (<HTMLInputElement>document.getElementById('nome')).value;
-    let cognome = (<HTMLInputElement>document.getElementById('cognome')).value;
-    let citta = (<HTMLInputElement>document.getElementById('citta')).value;
-    let indirizzo  = (<HTMLInputElement>document.getElementById('indirizzo')).value;
-    let email = (<HTMLInputElement>document.getElementById('email')).value;
-    let pass = (<HTMLInputElement>document.getElementById('password')).value;
-    let res = this.validateForm(nome,cognome,citta,indirizzo,email,pass);
-    var cliente: Cliente = {
-      nome: nome,
-      cognome: cognome,
-      citta: citta,
-      indirizzo: indirizzo,
-      email: email,
-    }
-    var driver: Driver = {
-      nome: nome,
-      cognome: cognome,
-      citta: citta,
-      indirizzo: indirizzo,
-      email: email,
-    }
     
-    this.regService.registerNewUser(email,pass)
-      .then(() => {
-        if(tipoAcc == 'Cliente') {
-          this.clienteService.addCliente(cliente);
-        }
-        else{
-          this.driverService.addDriver(driver);
-        }
-        this.presentAlert("Complimenti",'Registrazione avvenuta correttamente');
-      })
-      .catch((err) => {
-        this.presentAlert("Error",err.message);
-      })
-      
+    let res = this.validateForm();
+    console.log(res);
+    if(res) {
+      var cliente: Cliente = {
+        nome: this.nome,
+        cognome: this.cognome,
+        citta: this.citta,
+        indirizzo: this.indirizzo,
+        email: this.email,
+      }
+      var driver: Driver = {
+        nome: this.nome,
+        cognome: this.cognome,
+        citta: this.citta,
+        indirizzo: this.indirizzo,
+        email: this.email,
+      }
+      this.regService.registerNewUser(this.email, this.password)
+        .then(() => {
+          if(tipoAcc == 'Cliente') {
+            this.clienteService.addCliente(cliente);
+          }
+          else{
+            this.driverService.addDriver(driver);
+          }
+          this.presentAlert("Complimenti",'Registrazione avvenuta correttamente');
+        })
+        .catch((err) => {
+          this.presentAlert("Error",err.message);
+        })
+    }
+    else{
+      this.presentAlert("Attenzione","Riempi tutti i campi");
+    }
   }
 
 
@@ -94,9 +99,9 @@ export class RegisterPage implements OnInit {
     await alert.present();
   }
 
-  validateForm(nome: string, cog: string, citta: string, indirizzo: string, email: string, pass: string) {
+  validateForm() {
     var result = true;
-    if(nome == '' || cog == '' || citta == '' || indirizzo == '' || email == '' || pass == '') {
+    if(this.nome == '' || this.cognome == '' || this.citta == '' || this.indirizzo == '' || this.email == '' || this.password == '') {
       result = false;
     }
     return result;
