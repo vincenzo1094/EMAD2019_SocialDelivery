@@ -1,9 +1,42 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>Registrazione</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-item (click)="tipoPressed()">
+    <ion-label position="stacked">Tipo: {{tipoValue}}</ion-label>
+</ion-item>
+  <ion-item>
+    <ion-label position="stacked">Nome<ion-text color="danger">*</ion-text></ion-label>
+      <ion-input id="nome" required type="text"></ion-input>
+</ion-item>
+<ion-item>
+    <ion-label position="stacked">Cognome <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input id="cognome" required type="text"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label position="stacked">Indirizzo <ion-text color="danger">*</ion-text></ion-label>
+    <ion-input id="indirizzo" required type="text"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label position="stacked">Città <ion-text color="danger">*</ion-text></ion-label>
+    <ion-input id="citta" required type="text"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label position="stacked">Email <ion-text color="danger">*</ion-text></ion-label>
+    <ion-input id="email" required type="text"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label position="stacked">Password <ion-text color="danger">*</ion-text></ion-label>
+    <ion-input id = "password" required type="text"></ion-input>
+</ion-item>
+<ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="registerPressed()">
+  <ion-icon name="log-in"></ion-icon>
+  Registrati
+</ion-button>
 </ion-content>

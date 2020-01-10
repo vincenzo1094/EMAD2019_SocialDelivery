@@ -1,47 +1,56 @@
 <ion-header>
-    <ion-toolbar>
-       
-    <ion-title>
-      Ordini
-    </ion-title>
-      
-    </ion-toolbar>
-  </ion-header>
-  
-  <ion-content>
-      <div #mapElement class="map"></div>
-  </ion-content>
-  
-  <ion-footer>
-    <ion-toolbar>
-  
-      <ion-buttons > 
-        <ion-grid>
-          <ion-row>
-            <ion-col>
-        <ion-button (click)="viewPreferiti()">
-          <ion-icon slot="icon-only" name="bookmark"></ion-icon>
-        </ion-button>
-      </ion-col>
-      <ion-col>
-        <ion-button (click)="viewNegozi()">
-            <ion-icon slot="icon-only" name="map"></ion-icon>
-        </ion-button>
-      </ion-col>
-      <ion-col>
-        <ion-button (click)="viewOrdini()">
-          <ion-icon slot="icon-only" name="locate"></ion-icon>
-        </ion-button>
-      </ion-col>
-  
-      <ion-col>
-        <ion-button (click)="viewImpostazioni()">
-          <ion-icon slot="icon-only" name="settings"></ion-icon>
-        </ion-button>
-      </ion-col>
-      </ion-row>
-      </ion-grid>
-      </ion-buttons>
-    </ion-toolbar>
-  
-  </ion-footer>
+  <ion-toolbar color="primary">
+    <ion-title>Ordini</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item *ngFor="let o of ordini; let i = index" (click)="listElementClicked(o)">
+          <ion-label class= "name_label"padding > 
+            
+          </ion-label>
+          <ion-label class= "name_label"padding > 
+              {{toValue(o.stato)}}
+          </ion-label>
+          <ion-label class= "name_label"padding > 
+            € {{o.totale}}
+        </ion-label>
+          
+          
+        </ion-item>
+    </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+
+    <ion-buttons > 
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+      <ion-button color="dark" (click)="viewPreferiti()">
+        <ion-icon slot="icon-only" name="bookmark"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button color="dark" (click)="viewNegozi()">
+          <ion-icon slot="icon-only" name="map"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button color="dark" (click)="viewOrdini()">
+        <ion-icon slot="icon-only" name="locate"></ion-icon>
+      </ion-button>
+    </ion-col>
+
+    <ion-col>
+      <ion-button color="dark" (click)="viewImpostazioni()">
+        <ion-icon slot="icon-only" name="settings"></ion-icon>
+      </ion-button>
+    </ion-col>
+    </ion-row>
+    </ion-grid>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-footer>
