@@ -16,6 +16,7 @@ export class ClienteService {
   private cliente: Observable<Cliente[]>;
 
   constructor(db: AngularFirestore) {
+    
     this.clienteCollection = db.collection<Cliente>('clienti');
     this.collection = db.collection('clienti');
     this.cliente = this.clienteCollection.snapshotChanges().pipe(
@@ -30,7 +31,7 @@ export class ClienteService {
   }
 
   getClienti() {
-    return this.cliente;
+    return this.clienteCollection.valueChanges();
   }
 
   getCliente(id) {
@@ -50,10 +51,6 @@ export class ClienteService {
     return a;
   }
 
-  exists(email: string){
-    let query = this.collection.where('email','==',email);
-    console.log(query);
-  }
 
   removeCliente(id) {
     return this.clienteCollection.doc(id).delete();

@@ -25,6 +25,8 @@ export class LoginPage implements OnInit {
 
   };
 
+  isClient = false;
+
   /*negozi: Negozio[] = [
     {nome: 'Cartografia',
     id_esercente: '',
@@ -156,13 +158,18 @@ export class LoginPage implements OnInit {
   }
 
   goToHome() {
-    let email = (<HTMLInputElement>document.getElementById('email')).value;
-    let pass = (<HTMLInputElement>document.getElementById('pass')).value;
-    this.regService.login(email,pass)
+    this.regService.login(this.user.email,this.user.pw)
       .then(() => {
-        this.serve.exists(email);
-        //this.navCtrl.navigateForward('tabsCliente/negozi');
-        //else if esiste in driver andiamo in driver
+        this.serve.getClienti().subscribe(res => {
+          res.forEach(element => {
+            if(element.email == this.user.email) {
+              // è un cliente 
+              this.navCtrl.navigateForward('tabsCliente/negozi');
+            }
+          })
+          //qui fuori dal for vuol dire che è un drive ma è asincrono quindi viene eseguito mentre il for è ancora attivo
+        })
+        
       })
       .catch((err) =>{
         this.presentAlert('Error',err.message);
