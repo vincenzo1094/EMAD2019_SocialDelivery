@@ -13,27 +13,27 @@
 </ion-item>
   <ion-item>
     <ion-label position="stacked">Nome<ion-text color="danger">*</ion-text></ion-label>
-      <ion-input id="nome" required type="text"></ion-input>
+      <ion-input [(ngModel)]="nome" required type="text"></ion-input>
 </ion-item>
 <ion-item>
     <ion-label position="stacked">Cognome <ion-text color="danger">*</ion-text></ion-label>
-      <ion-input id="cognome" required type="text"></ion-input>
+      <ion-input [(ngModel)]="cognome" required type="text"></ion-input>
 </ion-item>
 <ion-item>
   <ion-label position="stacked">Indirizzo <ion-text color="danger">*</ion-text></ion-label>
-    <ion-input id="indirizzo" required type="text"></ion-input>
+    <ion-input [(ngModel)]="indirizzo" required type="text"></ion-input>
 </ion-item>
 <ion-item>
   <ion-label position="stacked">Città <ion-text color="danger">*</ion-text></ion-label>
-    <ion-input id="citta" required type="text"></ion-input>
+    <ion-input [(ngModel)]="citta" required type="text"></ion-input>
 </ion-item>
 <ion-item>
   <ion-label position="stacked">Email <ion-text color="danger">*</ion-text></ion-label>
-    <ion-input id="email" required type="text"></ion-input>
+    <ion-input [(ngModel)]="email" id="email" required type="text"></ion-input>
 </ion-item>
 <ion-item>
   <ion-label position="stacked">Password <ion-text color="danger">*</ion-text></ion-label>
-    <ion-input id = "password" required type="text"></ion-input>
+    <ion-input [(ngModel)]=  "password" required type="text"></ion-input>
 </ion-item>
 <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="registerPressed()">
   <ion-icon name="log-in"></ion-icon>

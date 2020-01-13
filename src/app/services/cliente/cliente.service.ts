@@ -11,12 +11,14 @@ import {Ordine} from 'src/app/interface/ordine';
 export class ClienteService {
 
   private clienteCollection: AngularFirestoreCollection<Cliente>;
+  private collection = null;
 
   private cliente: Observable<Cliente[]>;
 
   constructor(db: AngularFirestore) {
+    
     this.clienteCollection = db.collection<Cliente>('clienti');
-
+    this.collection = db.collection('clienti');
     this.cliente = this.clienteCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
@@ -29,7 +31,7 @@ export class ClienteService {
   }
 
   getClienti() {
-    return this.cliente;
+    return this.clienteCollection.valueChanges();
   }
 
   getCliente(id) {
@@ -48,6 +50,7 @@ export class ClienteService {
     });
     return a;
   }
+
 
   removeCliente(id) {
     return this.clienteCollection.doc(id).delete();

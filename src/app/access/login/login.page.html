@@ -15,7 +15,7 @@
           <ion-icon name="mail" class="ion-item-start"></ion-icon>
           Email
         </ion-label>
-        <ion-input color="dark" type="email" formControlName="email" [(ngModel)]='user.email'></ion-input>
+        <ion-input id="email" color="dark" type="email" formControlName="email" [(ngModel)]='user.email'></ion-input>
       </ion-item>
       <p  class="text08 ion-text" *ngIf="onLoginForm.get('email').touched && onLoginForm.get('email').hasError('required')">
         <ion-text color="warning">
@@ -28,7 +28,7 @@
           <ion-icon  name="lock" class="ion-item-start"></ion-icon>
           Password
         </ion-label>
-        <ion-input color="dark" type="password" formControlName="password" [(ngModel)]='user.pw'></ion-input>
+        <ion-input id="pass" color="dark" type="password" formControlName="password" [(ngModel)]='user.pw'></ion-input>
       </ion-item>
       <p color="warning" class="text08 ion-text" *ngIf="onLoginForm.get('password').touched && onLoginForm.get('password').hasError('required')">
         <ion-text color="warning">

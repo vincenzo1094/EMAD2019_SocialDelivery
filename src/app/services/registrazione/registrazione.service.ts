@@ -14,10 +14,12 @@ export class RegistrazioneService {
 
  
 
-  registerNewUser(email: string, pass: string, cliente?: Cliente, driver?: Driver) {
+  registerNewUser(email: string, pass: string) {
      return this.fireAuth.auth.createUserWithEmailAndPassword(email, pass);
-        
-     
+  }
+
+  login(email: string, pass) {
+    return this.fireAuth.auth.signInWithEmailAndPassword(email,pass);
   }
 
   
