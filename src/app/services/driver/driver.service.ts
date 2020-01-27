@@ -33,7 +33,7 @@ export class DriverService {
 
   addDriver(driver: Driver) {
 
-    if (this.platform.is('android')) {
+    /*if (this.platform.is('android')) {
       driver.token = this.firebase.getToken();
     }
 
@@ -43,7 +43,8 @@ export class DriverService {
     }
     if (this.platform.is('desktop')) {
       driver.token = 'desktop';
-    }
+      console.log(this.firebase.getToken());
+    }*/
     const a = this.driverCollection.add(driver);
     // tslint:disable-next-line: only-arrow-functions
     a.then( function(id) {

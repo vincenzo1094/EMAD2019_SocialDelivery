@@ -36,15 +36,8 @@ export class RegisterPage implements OnInit {
   ngOnInit() {
   }
 
-  tipoPressed() {
-    if(this.tipoValue == "Cliente") {
-      this.tipoValue = "Driver";
-    }
-    else {this.tipoValue = "Cliente";}
-  }
-
   registerPressed() {
-    let tipoAcc = this.tipoValue;
+    console.log(this.tipoValue);
     
     let res = this.validateForm();
     console.log(res);
@@ -68,7 +61,7 @@ export class RegisterPage implements OnInit {
       }
       this.regService.registerNewUser(this.email, this.password)
         .then(() => {
-          if(tipoAcc == 'Cliente') {
+          if(this.tipoValue == 'C') {
             this.clienteService.addCliente(cliente);
           }
           else{
