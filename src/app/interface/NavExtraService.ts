@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class NavExtrasService {
 
     extras: any;
+    cliente: string;
 
       constructor() { }
 
@@ -15,5 +16,13 @@ export class NavExtrasService {
 
       public getExtras(){
         return this.extras;
+      }
+
+      public setCliente(cliente) {
+        this.cliente = cliente;
+      }
+
+      public getCliente(){
+        return this.cliente;
       }
     }

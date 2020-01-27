@@ -7,6 +7,7 @@ import { AlertController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import {Driver} from 'src/app/interface/driver';
 import {DriverService} from 'src/app/services/driver/driver.service';
+import { NavExtrasService } from 'src/app/interface/NavExtraService';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +21,8 @@ export class RegisterPage implements OnInit {
               public loadingController: LoadingController,
               private clienteService: ClienteService,
               private driverService: DriverService,
-              private navCtrl: NavController) {}
+              private navCtrl: NavController,
+              private navExtra: NavExtrasService) {}
 
   tipoValue: string = "Cliente";
   message: string = '';
@@ -53,6 +55,9 @@ export class RegisterPage implements OnInit {
         citta: this.citta,
         indirizzo: this.indirizzo,
         email: this.email,
+        ordini: null,
+        preferiti: null,
+        avatar:null
       }
       var driver: Driver = {
         nome: this.nome,
@@ -72,7 +77,7 @@ export class RegisterPage implements OnInit {
           this.presentAlert("Complimenti",'Registrazione avvenuta correttamente');
         })
         .catch((err) => {
-          this.presentAlert("Error",err.message);
+          this.presentAlert("Error",err.message,);
         })
     }
     else{
@@ -90,6 +95,7 @@ export class RegisterPage implements OnInit {
         text: 'OK',
         handler: () => {
           if(message == 'Registrazione avvenuta correttamente') {
+            this.navExtra.setCliente(this.email);
             this.navCtrl.navigateForward('tabsCliente/negozi');
           }
         }

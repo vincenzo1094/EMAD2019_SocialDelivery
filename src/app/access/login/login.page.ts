@@ -9,6 +9,7 @@ import {Prodotto} from './../../interface/prodotto';
 import { Mezzo } from 'src/app/interface/mezzo';
 import {ProdottoService} from './../../services/prodotto/prodotto.service';
 import {RegistrazioneService} from 'src/app/services/registrazione/registrazione.service';
+import { NavExtrasService } from 'src/app/interface/NavExtraService';
 
 
 @Component({
@@ -89,7 +90,8 @@ export class LoginPage implements OnInit {
     private serve: ClienteService,
     private prodService: ProdottoService,
     private regService: RegistrazioneService,
-    public alertController: AlertController) { }
+    public alertController: AlertController,
+    private navExtra: NavExtrasService) { }
 
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
@@ -163,8 +165,13 @@ export class LoginPage implements OnInit {
         this.serve.getClienti().subscribe(res => {
           res.forEach(element => {
             if(element.email == this.user.email) {
-              // è un cliente 
+              // è un cliente
+              this.navExtra.setCliente(this.user.email);
               this.navCtrl.navigateForward('tabsCliente/negozi');
+              
+            }
+            else{
+              //this.navCtrl.navigateForward('tabsDriver/spedizioni');
             }
           })
           //qui fuori dal for vuol dire che è un drive ma è asincrono quindi viene eseguito mentre il for è ancora attivo

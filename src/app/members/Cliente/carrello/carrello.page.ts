@@ -13,6 +13,7 @@ import { ClienteService } from 'src/app/services/cliente/cliente.service';
 import {Cliente} from 'src/app/interface/cliente';
 
 
+
 @Component({
   selector: 'app-carrello',
   templateUrl: './carrello.page.html',
@@ -22,7 +23,7 @@ export class CarrelloPage implements OnInit {
 
   productsInCart : Prodotto[] = [];
   totalProducts : Prodotto[] = [];
-  idCliente: string = 'mOWkoHADMpG8F4uIY07Z'; // Inserire qui il vero id cliente
+  idCliente: string = "";
   idNegozio: string;
   prodotto: Prodotto = {
     id:null,
@@ -36,12 +37,13 @@ export class CarrelloPage implements OnInit {
     cliente: Cliente = {
       };
 
-  constructor(private route: ActivatedRoute,private navExtra: NavExtrasService,private nav: NavController,public alertController: AlertController,private clientService: ClienteService) { }
+  constructor(private route: ActivatedRoute,private navExtra: NavExtrasService,private nav: NavController,public alertController: AlertController,private clientService: ClienteService,private ordService: OrdineService) { }
 
   ngOnInit() {
     this.totalProducts = this.navExtra.getExtras()[0];
     this.idNegozio = this.navExtra.getExtras()[1];
     this.productsInCart = this.totalProducts.filter(item => item.quantitaCarrello > 0);
+    this.idCliente = this.navExtra.getCliente();
   }
 
   getTotale() {
@@ -74,7 +76,7 @@ export class CarrelloPage implements OnInit {
     const newOrder: Ordine = {
       stato: stato_ordine.ATTESA,
       id_negozio: this.idNegozio,
-      id_cliente: "cliente",
+      id_cliente: this.idCliente,
       prodotti: prods,
       totale:this.getTotale()}; 
     
@@ -83,8 +85,10 @@ export class CarrelloPage implements OnInit {
     }
     else {
       this.cliente.ordini.push(newOrder);
+      console.log(this.cliente.ordini);
     }
     this.clientService.updateCliente(this.cliente,this.idCliente);
+    this.ordService.addOrdine(newOrder);
     this.presentAlert();
   }
 

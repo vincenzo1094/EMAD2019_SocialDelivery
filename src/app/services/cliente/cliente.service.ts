@@ -39,16 +39,20 @@ export class ClienteService {
   }
 
   updateCliente(cliente: Cliente, id: string) {
-    return this.clienteCollection.doc(id).update(cliente);
+    this.clienteCollection.doc(id).update(cliente);
   }
 
   addCliente(cliente: Cliente) {
-    const a = this.clienteCollection.add(cliente);
-    // tslint:disable-next-line: only-arrow-functions
-    a.then( function(id) {
-      console.log(id.id);
+    this.clienteCollection.doc(cliente.email).set({
+      nome: cliente.nome,
+      citta: cliente.citta,
+      indirizzo: cliente.indirizzo,
+      ordini: cliente.ordini,
+      cognome: cliente.cognome,
+      preferiti: cliente.preferiti,
+      avatar: cliente.avatar,
+      email: cliente.email
     });
-    return a;
   }
 
 
