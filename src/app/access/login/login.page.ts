@@ -172,7 +172,6 @@ export class LoginPage implements OnInit {
               this.navCtrl.navigateForward('tabsDriver/spedizioni');
             }
           })
-          //qui fuori dal for vuol dire che è un drive ma è asincrono quindi viene eseguito mentre il for è ancora attivo
         })
         
       })
