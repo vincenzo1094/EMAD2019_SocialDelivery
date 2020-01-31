@@ -87,9 +87,15 @@ export class RegisterPage implements OnInit {
       buttons: [{
         text: 'OK',
         handler: () => {
-          if(message == 'Registrazione avvenuta correttamente') {
-            this.navExtra.setCliente(this.email);
-            this.navCtrl.navigateForward('tabsCliente/negozi');
+          if (message == 'Registrazione avvenuta correttamente') {
+            if(this.tipoValue == 'C') {
+              this.navExtra.setCliente(this.email);
+              this.navCtrl.navigateForward('tabsCliente/negozi');
+            }
+            else {
+              this.navExtra.setExtras(this.email);
+              this.navCtrl.navigateForward('tabsDriver/spedizioni');
+            }
           }
         }
       }]

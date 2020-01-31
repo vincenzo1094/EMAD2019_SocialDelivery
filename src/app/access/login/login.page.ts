@@ -165,13 +165,11 @@ export class LoginPage implements OnInit {
         this.serve.getClienti().subscribe(res => {
           res.forEach(element => {
             if(element.email == this.user.email) {
-              // è un cliente
               this.navExtra.setCliente(this.user.email);
               this.navCtrl.navigateForward('tabsCliente/negozi');
-              
             }
             else{
-              //this.navCtrl.navigateForward('tabsDriver/spedizioni');
+              this.navCtrl.navigateForward('tabsDriver/spedizioni');
             }
           })
           //qui fuori dal for vuol dire che è un drive ma è asincrono quindi viene eseguito mentre il for è ancora attivo
