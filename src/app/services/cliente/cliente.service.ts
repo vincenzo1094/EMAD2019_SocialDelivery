@@ -43,16 +43,7 @@ export class ClienteService {
   }
 
   addCliente(cliente: Cliente) {
-    this.clienteCollection.doc(cliente.email).set({
-      nome: cliente.nome,
-      citta: cliente.citta,
-      indirizzo: cliente.indirizzo,
-      ordini: cliente.ordini,
-      cognome: cliente.cognome,
-      preferiti: cliente.preferiti,
-      avatar: cliente.avatar,
-      email: cliente.email
-    });
+    this.clienteCollection.doc(cliente.email).set(cliente);
   }
 
 
