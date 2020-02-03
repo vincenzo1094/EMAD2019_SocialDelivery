@@ -5,7 +5,7 @@ import { Ordine } from 'src/app/interface/ordine';
 import {ClienteService} from 'src/app/services/cliente/cliente.service';
 import {Cliente} from 'src/app/interface/cliente';
 import {stato_ordine} from 'src/app/interface/stato_ordine';
-
+import {NavExtrasService} from 'src/app/interface/NavExtraService';
 
 @Component({
   selector: 'app-ordini',
@@ -15,16 +15,18 @@ import {stato_ordine} from 'src/app/interface/stato_ordine';
 export class OrdiniPage implements OnInit {
 
   ordini: Ordine[] = [];
-  clienteID: string = 'mOWkoHADMpG8F4uIY07Z';
+  clienteID: string = '';
 
-  constructor(public navCtrl: NavController, private route: ActivatedRoute, private clienteService: ClienteService) { }
+  constructor(public navCtrl: NavController, private route: ActivatedRoute, private clienteService: ClienteService,private navExtra: NavExtrasService) { }
 
 
   listElementClicked(ordine: Ordine) {
-
+    this.navExtra.setOrdine(ordine);
+    
   }
 
   ngOnInit() {
+    this.clienteID = this.navExtra.getCliente();
     this.clienteService.getCliente(this.clienteID).subscribe(res => {
       this.ordini = res.ordini;
     })

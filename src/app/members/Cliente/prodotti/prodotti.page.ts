@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NavigationExtras } from '@angular/router';
 import { Router } from '@angular/router';
 import { NavExtrasService } from 'src/app/interface/NavExtraService';
-
+import { Mezzo } from 'src/app/interface/mezzo';
 
 @Component({
   selector: 'app-prodotti',
@@ -18,7 +18,15 @@ export class ProdottiPage implements OnInit{
 
   shop = '';
   products : Prodotto[] = [];
-  prodotto: Prodotto;
+
+  prodotto: Prodotto = {
+    nome: "",
+    prezzo:0,
+    quantita:0,
+    quantitaCarrello:0,
+    mezzo: Mezzo.AUTO,
+    id:""
+  }
   negozio: String;
 
   constructor(private prodService: ProdottoService,public navCtrl: NavController, private route: ActivatedRoute, private router: Router, private navExtra: NavExtrasService) { 
@@ -42,6 +50,7 @@ export class ProdottiPage implements OnInit{
     if(this.products.length == 0) {
       for(let id of products){
         this.prodService.getProdotto(id).subscribe(res => {
+
           this.prodotto = res;
           this.prodotto.id = id;
           this.prodotto.quantitaCarrello = 0;

@@ -169,7 +169,7 @@ export class LoginPage implements OnInit {
               this.navCtrl.navigateForward('tabsCliente/negozi');
             }
             else{
-              this.navCtrl.navigateForward('tabsDriver/spedizioni');
+              //this.navCtrl.navigateForward('tabsDriver/spedizioni');
             }
           })
         })
