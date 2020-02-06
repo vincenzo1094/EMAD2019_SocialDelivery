@@ -37,7 +37,12 @@ export class CarrelloPage implements OnInit {
     cliente: Cliente = {
       };
 
-  constructor(private route: ActivatedRoute,private navExtra: NavExtrasService,private nav: NavController,public alertController: AlertController,private clientService: ClienteService,private ordService: OrdineService) { }
+  constructor(private route: ActivatedRoute,
+    private navExtra: NavExtrasService,
+    private nav: NavController,
+    public alertController: AlertController,
+    private clientService: ClienteService,
+    private ordService: OrdineService) { }
 
   ngOnInit() {
     this.totalProducts = this.navExtra.getExtras()[0];

@@ -15,6 +15,7 @@ export class OrdineService {
   
   private ordine: Observable<Ordine[]>;
 
+
   constructor(db: AngularFirestore) {
     this.ordiniCollection = db.collection<Ordine>('ordini');
 

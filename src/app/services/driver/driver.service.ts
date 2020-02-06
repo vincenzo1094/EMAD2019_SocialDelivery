@@ -13,14 +13,14 @@ export class DriverService {
 
   private driverCollection: AngularFirestoreCollection<Driver>;
 
-  private cliente: Observable<Driver[]>;
+  private drivers: Observable<Driver[]>;
 
   constructor(private db: AngularFirestore,
               private firebase: Firebase,
               private platform: Platform) {
     this.driverCollection = db.collection<Driver>('drivers');
 
-    this.cliente = this.driverCollection.snapshotChanges().pipe(
+    this.drivers = this.driverCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
           const data = a.payload.doc.data();
@@ -30,11 +30,16 @@ export class DriverService {
       })
     );
   }
+  
+  getDrivers(){
+    return this.drivers;
+  }
+  
    async addDriver(driver: Driver) {
 
     if (this.platform.is('android')) {
       driver.token = await this.firebase.getToken();
-    } 
+    }
 
     const a = this.driverCollection.add(driver);
     // tslint:disable-next-line: only-arrow-functions

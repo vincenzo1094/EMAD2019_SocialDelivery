@@ -17,8 +17,6 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { Firebase } from '@ionic-native/firebase/ngx';
 
 
-
-
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
