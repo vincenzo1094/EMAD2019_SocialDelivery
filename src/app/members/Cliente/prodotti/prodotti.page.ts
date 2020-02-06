@@ -8,6 +8,7 @@ import { NavigationExtras } from '@angular/router';
 import { Router } from '@angular/router';
 import { NavExtrasService } from 'src/app/interface/NavExtraService';
 import { Mezzo } from 'src/app/interface/mezzo';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-prodotti',
@@ -29,7 +30,7 @@ export class ProdottiPage implements OnInit{
   }
   negozio: String;
 
-  constructor(private prodService: ProdottoService,public navCtrl: NavController, private route: ActivatedRoute, private router: Router, private navExtra: NavExtrasService) { 
+  constructor(private prodService: ProdottoService,public navCtrl: NavController, private route: ActivatedRoute, private router: Router, private navExtra: NavExtrasService,public alertController: AlertController) { 
     
   }
 
@@ -78,7 +79,12 @@ export class ProdottiPage implements OnInit{
   }
 
   plusButtonPressed(index: number){
-    this.products[index].quantitaCarrello = this.products[index].quantitaCarrello + 1;
+    if(this.products[index].quantita < this.products[index].quantitaCarrello + 1){
+      this.presentAlert("Attenzione","Quantità non disponibile");
+    }
+    else{
+      this.products[index].quantitaCarrello = this.products[index].quantitaCarrello + 1;
+    }
   }
 
   getTotalProductsInTheCart() {
@@ -88,6 +94,17 @@ export class ProdottiPage implements OnInit{
     }
     return sum;
   }
+
+  async presentAlert(header:string, message:string) {
+    const alert = await this.alertController.create({
+      header: header,
+      subHeader: '',
+      message: message,
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  } 
 
 
   viewOrdini(){

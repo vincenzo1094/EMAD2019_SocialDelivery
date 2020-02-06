@@ -55,6 +55,7 @@ export class NegozioService {
   }
 
 
+
   addNegozio(negozio: Negozio) {
     return this.negozioCollection.add(negozio);
 

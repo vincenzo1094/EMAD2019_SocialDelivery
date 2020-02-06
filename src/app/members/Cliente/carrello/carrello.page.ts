@@ -10,6 +10,7 @@ import {stato_ordine} from 'src/app/interface/stato_ordine';
 import { ProdottoOrdine } from 'src/app/interface/prodotto_ordine';
 import { OrdineService } from 'src/app/services/ordine/ordine.service';
 import { ClienteService } from 'src/app/services/cliente/cliente.service';
+import { ProdottoService } from 'src/app/services/prodotto/prodotto.service';
 import {Cliente} from 'src/app/interface/cliente';
 
 
@@ -42,7 +43,8 @@ export class CarrelloPage implements OnInit {
     private nav: NavController,
     public alertController: AlertController,
     private clientService: ClienteService,
-    private ordService: OrdineService) { }
+    private ordService: OrdineService,
+    private prodService: ProdottoService) { }
 
   ngOnInit() {
     this.totalProducts = this.navExtra.getExtras()[0];
@@ -72,6 +74,7 @@ export class CarrelloPage implements OnInit {
   pagaPressed() {
     var prods: ProdottoOrdine[] = [];
     for(let p of this.productsInCart) {
+      this.prodService.updateQuantita(p.id,p.quantita - p.quantitaCarrello);
       var ord : ProdottoOrdine = {
         id: p.id,
         quantita: p.quantitaCarrello
@@ -95,15 +98,15 @@ export class CarrelloPage implements OnInit {
     
     this.clientService.updateCliente(this.cliente,this.idCliente);
     this.ordService.addOrdine(newOrder);
-    this.presentAlert();
+    this.presentAlert("Complimenti","Pagamento effettuato con successo");
   }
 
 
-  async presentAlert() {
+  async presentAlert(header:string, message:string) {
     const alert = await this.alertController.create({
-      header: 'Complimenti',
+      header: header,
       subHeader: '',
-      message: 'Pagamento effettuato con successo',
+      message: message,
       buttons: ['OK']
     });
 
