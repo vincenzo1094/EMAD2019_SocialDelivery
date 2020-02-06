@@ -167,6 +167,7 @@ export class LoginPage implements OnInit {
       .then(() => {
         this.serve.getClienti().subscribe(res => {
           res.forEach(element => {
+<<<<<<< HEAD
             if(element.email == this.user.email)
               flagGoToHome = true;
           })
@@ -178,6 +179,16 @@ export class LoginPage implements OnInit {
             this.navCtrl.navigateForward('tabsDriver/spedizioni');
           }
           //qui fuori dal for vuol dire che è un drive ma è asincrono quindi viene eseguito mentre il for è ancora attivo
+=======
+            if(element.email == this.user.email) {
+              this.navExtra.setCliente(this.user.email);
+              this.navCtrl.navigateForward('tabsCliente/negozi');
+            }
+            else{
+              //this.navCtrl.navigateForward('tabsDriver/spedizioni');
+            }
+          })
+>>>>>>> 0d71eb6c7a7e10ffb621b145c057f3a6a3aadaa2
         })
         
       })

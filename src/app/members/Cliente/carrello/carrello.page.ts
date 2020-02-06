@@ -92,6 +92,7 @@ export class CarrelloPage implements OnInit {
       this.cliente.ordini.push(newOrder);
       console.log(this.cliente.ordini);
     }
+    
     this.clientService.updateCliente(this.cliente,this.idCliente);
     this.ordService.addOrdine(newOrder);
     this.presentAlert();
