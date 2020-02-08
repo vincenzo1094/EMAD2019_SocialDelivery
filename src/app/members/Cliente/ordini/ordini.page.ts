@@ -3,6 +3,7 @@ import { NavController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { Ordine } from 'src/app/interface/ordine';
 import {ClienteService} from 'src/app/services/cliente/cliente.service';
+import {NegozioService} from 'src/app/services/negozio/negozio.service';
 import {Cliente} from 'src/app/interface/cliente';
 import {stato_ordine} from 'src/app/interface/stato_ordine';
 import {NavExtrasService} from 'src/app/interface/NavExtraService';
@@ -17,12 +18,12 @@ export class OrdiniPage implements OnInit {
   ordini: Ordine[] = [];
   clienteID: string = '';
 
-  constructor(public navCtrl: NavController, private route: ActivatedRoute, private clienteService: ClienteService,private navExtra: NavExtrasService) { }
+  constructor(public navCtrl: NavController, private route: ActivatedRoute, private clienteService: ClienteService,private navExtra: NavExtrasService,private negService: NegozioService) { }
 
 
   listElementClicked(ordine: Ordine) {
     this.navExtra.setOrdine(ordine);
-    
+    this.navCtrl.navigateForward('tabsCliente/dettagli-ordine');
   }
 
   ngOnInit() {
@@ -46,9 +47,6 @@ export class OrdiniPage implements OnInit {
     return 'ATTESA';
   }
 
-  getNegozioName(idNegozio: string) {
-    
-  }
 
   viewOrdini(){
     this.navCtrl.navigateRoot('/tabsCliente/ordini');

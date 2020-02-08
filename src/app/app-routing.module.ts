@@ -24,6 +24,7 @@ const routes: Routes = [
   { path: 'tabsCliente/prodotti', loadChildren: './members/Cliente/prodotti/prodotti.module#ProdottiPageModule' },
   { path: 'tabsCliente/dettagli', loadChildren: './members/Cliente/dettagli/dettagli.module#DettagliPageModule' },
   { path: 'tabsCliente/carrello', loadChildren: './members/Cliente/carrello/carrello.module#CarrelloPageModule' },
+  { path: 'tabsCliente/dettagli-ordine', loadChildren: './members/Cliente/dettagli_ordine/dettagli-ordine/dettagli-ordine.module#DettagliOrdinePageModule' },
 
 
 

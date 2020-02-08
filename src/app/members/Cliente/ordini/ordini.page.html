@@ -7,14 +7,14 @@
 <ion-content>
     <ion-list>
         <ion-item *ngFor="let o of ordini; let i = index" (click)="listElementClicked(o)">
-          <ion-label class= "name_label"padding > 
-              {{toValue(o.stato)}}
-          </ion-label>
-          <ion-label class= "name_label"padding > 
-            € {{o.totale}}
+        <ion-label stacked>
+         <h2> Negozio: {{o.id_negozio}}</h2>
+        
+          <h2>  Stato ordine: {{toValue(o.stato)}}</h2>
+         
+         
+           <h2> Prezzo: {{o.totale}} €</h2>
         </ion-label>
-          
-          
         </ion-item>
     </ion-list>
 </ion-content>

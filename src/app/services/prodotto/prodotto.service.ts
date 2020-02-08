@@ -38,5 +38,9 @@ export class ProdottoService {
   addProdotto(prodotto: Prodotto) {
     return this.prodottiCollection.add(prodotto);
   }
+
+  updateQuantita(idProdotto: string, quantita: number) {
+    this.prodottiCollection.doc(idProdotto).update({quantita: quantita});
+  }
   
 }
