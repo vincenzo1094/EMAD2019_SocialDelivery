@@ -16,7 +16,7 @@ export class OrdineService {
   private ordine: Observable<Ordine[]>;
 
 
-  constructor(db: AngularFirestore) {
+  constructor(private db: AngularFirestore) {
     this.ordiniCollection = db.collection<Ordine>('ordini');
 
     this.ordine = this.ordiniCollection.snapshotChanges().pipe(
@@ -32,6 +32,27 @@ export class OrdineService {
 
   getOrdini(){
     return this.ordine;
+  }
+
+  getOrdiniAttesa(){
+    let ordiniInAttesaCollection: AngularFirestoreCollection<Ordine>;
+    let ordiniInAttesa: Observable<Ordine[]>;
+    ordiniInAttesaCollection = this.db.collection<Ordine>('ordini', ref=> ref.where('stato', '==', 2));
+
+    ordiniInAttesa = ordiniInAttesaCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );
+    return ordiniInAttesa;
+  }
+
+  updateOrdine(ordine: Ordine, id: string) {
+    this.ordiniCollection.doc(id).update(ordine);
   }
 
   getOrdine(id){

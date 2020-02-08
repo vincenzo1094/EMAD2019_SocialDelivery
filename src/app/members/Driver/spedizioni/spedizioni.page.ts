@@ -20,24 +20,28 @@ export class SpedizioniPage implements OnInit {
               public ordineService: OrdineService) { }
   
   ngOnInit() {
-   this.ordineService.getOrdini().subscribe(res => {
+   this.ordineService.getOrdiniAttesa().subscribe(res => {
     this.ordine = res;
    });
   }
 
-  async presentActionSheet() {
+  async presentActionSheet(ordine) {
     const actionSheet = await this.actionSheetController.create({
       header: 'Actions',
       buttons: [{
         text: 'Accetta',
         icon: 'checkmark-circle-outline',
         handler: () => {
+          ordine.stato = 3;
+          this.ordineService.updateOrdine(ordine, ordine.id);
           console.log('Share clicked');
         }
       }, {
         text: 'Rifiuta',
         icon: 'close-circle-outline',
         handler: () => {
+          ordine.stato = 4;
+          this.ordineService.updateOrdine(ordine, ordine.id);
           console.log('Play clicked');
         }
       }, {
