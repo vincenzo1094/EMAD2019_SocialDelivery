@@ -83,6 +83,10 @@ export class NegoziPage implements OnInit, AfterViewInit {
             position: pos,
             map,
             title: 'Shop',
+            label:{
+              text: element['nome'],
+              fontSize:'10px'
+            },
             icon
           });
           marker.addListener('click', () => {
