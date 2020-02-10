@@ -4,6 +4,8 @@ import { ActionSheetController } from '@ionic/angular';
 import {OrdineService} from '../../../services/ordine/ordine.service';
 import {Ordine} from '../../../interface/ordine';
 import { Observable } from 'rxjs';
+import { ClienteService } from 'src/app/services/cliente/cliente.service';
+
 
 @Component({
   selector: 'app-spedizioni',
@@ -13,11 +15,13 @@ import { Observable } from 'rxjs';
 export class SpedizioniPage implements OnInit {
 
   public ordine: Ordine[];
-
+  
 
   constructor(public navCtrl: NavController, 
               public actionSheetController: ActionSheetController,
-              public ordineService: OrdineService) { }
+              public ordineService: OrdineService,
+              public clienteService: ClienteService,
+             ) { }
   
   ngOnInit() {
    this.ordineService.getOrdiniAttesa().subscribe(res => {
@@ -25,23 +29,25 @@ export class SpedizioniPage implements OnInit {
    });
   }
 
-  async presentActionSheet(ordine) {
+  async presentActionSheet(ordine: Ordine) {
+    console.log(ordine);
     const actionSheet = await this.actionSheetController.create({
       header: 'Actions',
       buttons: [{
         text: 'Accetta',
         icon: 'checkmark-circle-outline',
         handler: () => {
-          ordine.stato = 3;
-          this.ordineService.updateOrdine(ordine, ordine.id);
+          console.log(ordine.id);
+          this.clienteService.updateStato(ordine.id_cliente,ordine.id,3);
+          this.ordineService.updateStato(3,ordine.id);
           console.log('Share clicked');
         }
       }, {
         text: 'Rifiuta',
         icon: 'close-circle-outline',
         handler: () => {
-          ordine.stato = 4;
-          this.ordineService.updateOrdine(ordine, ordine.id);
+          this.clienteService.updateStato(ordine.id_cliente,ordine.id,4);
+          this.ordineService.updateStato(4,ordine.id);
           console.log('Play clicked');
         }
       }, {
