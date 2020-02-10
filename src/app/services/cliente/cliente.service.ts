@@ -46,6 +46,9 @@ export class ClienteService {
     this.clienteCollection.doc(cliente.email).set(cliente);
   }
 
+  updateOrdini(idCliente: string, ordini: Ordine[]) {
+    this.clienteCollection.doc(idCliente).update({ordini: ordini});
+  }
 
   removeCliente(id) {
     return this.clienteCollection.doc(id).delete();

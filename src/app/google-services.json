@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1069793701700",
+    "firebase_url": "https://socialdelapp.firebaseio.com",
+    "project_id": "socialdelapp",
+    "storage_bucket": "socialdelapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1069793701700:android:b964cc9023ec1155587111",
+        "android_client_info": {
+          "package_name": "com.dav.socialDelivery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1069793701700-dno8ddj00u55op3s8qlck7mmumhncih3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDvp6dGffqmd6q2RDHWV95zHZZvhkLQPM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1069793701700-dno8ddj00u55op3s8qlck7mmumhncih3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
