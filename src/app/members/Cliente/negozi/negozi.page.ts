@@ -77,15 +77,11 @@ export class NegoziPage implements OnInit, AfterViewInit {
             url: 'assets/icon/s.png', // image url
             scaledSize: new google.maps.Size(40, 40), // scaled size
           };
-          
+
           // tslint:disable-next-line: no-shadowed-variable
           const marker = new google.maps.Marker({
             position: pos,
             map,
-            label:{
-              text: element['nome'],
-              fontSize: '10px'
-            },
             title: 'Shop',
             icon
           });
