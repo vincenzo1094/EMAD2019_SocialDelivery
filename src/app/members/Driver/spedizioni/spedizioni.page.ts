@@ -38,7 +38,7 @@ export class SpedizioniPage implements OnInit {
         icon: 'checkmark-circle-outline',
         handler: () => {
           console.log(ordine.id);
-          this.clienteService.updateStato(ordine.id_cliente,ordine.id,3);
+          this.clienteService.updateStato(ordine.id_cliente,ordine.id,0);
           this.ordineService.updateStato(3,ordine.id);
           console.log('Share clicked');
         }
@@ -46,7 +46,7 @@ export class SpedizioniPage implements OnInit {
         text: 'Rifiuta',
         icon: 'close-circle-outline',
         handler: () => {
-          this.clienteService.updateStato(ordine.id_cliente,ordine.id,4);
+          this.clienteService.updateStato(ordine.id_cliente,ordine.id,3);
           this.ordineService.updateStato(4,ordine.id);
           console.log('Play clicked');
         }
