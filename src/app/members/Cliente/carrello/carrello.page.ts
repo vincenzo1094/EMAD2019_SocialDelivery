@@ -12,7 +12,8 @@ import { OrdineService } from 'src/app/services/ordine/ordine.service';
 import { ClienteService } from 'src/app/services/cliente/cliente.service';
 import { ProdottoService } from 'src/app/services/prodotto/prodotto.service';
 import {Cliente} from 'src/app/interface/cliente';
-
+import { Storage } from '@ionic/storage';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 
 @Component({
@@ -39,18 +40,25 @@ export class CarrelloPage implements OnInit {
       };
 
   constructor(private route: ActivatedRoute,
-    private navExtra: NavExtrasService,
-    private nav: NavController,
-    public alertController: AlertController,
-    private clientService: ClienteService,
-    private ordService: OrdineService,
-    private prodService: ProdottoService) { }
+              private navExtra: NavExtrasService,
+              private nav: NavController,
+              public alertController: AlertController,
+              private clientService: ClienteService,
+              private ordService: OrdineService,
+              private prodService: ProdottoService,
+              private storage: Storage) { }
 
   ngOnInit() {
     this.totalProducts = this.navExtra.getExtras()[0];
     this.idNegozio = this.navExtra.getExtras()[1];
     this.productsInCart = this.totalProducts.filter(item => item.quantitaCarrello > 0);
-    this.idCliente = this.navExtra.getCliente();
+    this.storage.get('cliente').then((val) => {
+      this.idCliente = val;
+      this.clientService.getCliente(this.idCliente).subscribe(res => {
+        this.cliente = res;
+      });
+    });
+    
   }
 
   getTotale() {
@@ -81,23 +89,28 @@ export class CarrelloPage implements OnInit {
       }
       prods.push(ord);
     }
-    const newOrder: Ordine = {
+    var newOrder: Ordine = {
       stato: stato_ordine.ATTESA,
       id_negozio: this.idNegozio,
       id_cliente: this.idCliente,
       prodotti: prods,
       totale:this.getTotale()}; 
-    
-    if(this.cliente.ordini == null) {
-      this.cliente.ordini = [newOrder]
-    }
-    else {
-      this.cliente.ordini.push(newOrder);
-      console.log(this.cliente.ordini);
-    }
-    
-    this.clientService.updateCliente(this.cliente,this.idCliente);
-    this.ordService.addOrdine(newOrder);
+    var client = this.cliente;
+    var service = this.clientService;
+    var id = this.idCliente;
+    this.ordService.addOrdine(newOrder).then(function(elem){
+      newOrder.id = elem.id;
+      if(client.ordini == null) {
+        client.ordini = [newOrder]
+      }
+      else {
+        client.ordini.push(newOrder);
+      }
+      console.log(client.ordini);
+      
+      service.updateOrdini(id,client.ordini);
+      
+    });
     this.presentAlert("Complimenti","Pagamento effettuato con successo");
   }
 

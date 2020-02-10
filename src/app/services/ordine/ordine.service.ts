@@ -55,6 +55,10 @@ export class OrdineService {
     this.ordiniCollection.doc(id).update(ordine);
   }
 
+  updateStato(stato: number, id: string) {
+    this.ordiniCollection.doc(id).update({stato: stato});
+  }
+
   getOrdine(id){
     return this.ordiniCollection.doc<Ordine>(id).valueChanges();   
   }

@@ -10,7 +10,7 @@ import { Mezzo } from 'src/app/interface/mezzo';
 import {ProdottoService} from './../../services/prodotto/prodotto.service';
 import {RegistrazioneService} from 'src/app/services/registrazione/registrazione.service';
 import { NavExtrasService } from 'src/app/interface/NavExtraService';
-
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-login',
@@ -91,7 +91,8 @@ export class LoginPage implements OnInit {
     private prodService: ProdottoService,
     private regService: RegistrazioneService,
     public alertController: AlertController,
-    private navExtra: NavExtrasService) { }
+    private navExtra: NavExtrasService,
+    private storage: Storage) { }
 
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
@@ -172,6 +173,7 @@ export class LoginPage implements OnInit {
           })
           if(flagGoToHome){
             this.navExtra.setCliente(this.user.email);
+            this.storage.set('cliente',this.user.email);
             this.navCtrl.navigateForward('tabsCliente/negozi');
           }
           else{
