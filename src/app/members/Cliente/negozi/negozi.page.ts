@@ -38,7 +38,7 @@ export class NegoziPage implements OnInit, AfterViewInit {
       const map = new google.maps.Map(this.mapNativeElement.nativeElement, {
         center: {lat: -34.397,  lng: 150.644},
         zoom: 16,
-        //disableDefaultUI: true
+        disableDefaultUI: true
       });
 
       /*location object*/
@@ -83,6 +83,10 @@ export class NegoziPage implements OnInit, AfterViewInit {
             position: pos,
             map,
             title: 'Shop',
+            label:{
+              text: element['nome'],
+              fontSize:'10px'
+            },
             icon
           });
           marker.addListener('click', () => {

@@ -7,6 +7,9 @@ import {Ordine} from '../../../interface/ordine';
 import { Observable } from 'rxjs';
 import { Negozio } from 'src/app/interface/negozio';
 import { NavigationExtras, Router } from '@angular/router';
+import { ClienteService } from 'src/app/services/cliente/cliente.service';
+
+
 
 @Component({
   selector: 'app-spedizioni',
@@ -24,11 +27,13 @@ export class SpedizioniPage implements OnInit {
 
   }
 
+  
 
   constructor(public navCtrl: NavController, 
               public actionSheetController: ActionSheetController,
               public ordineService: OrdineService,
               public negozioService: NegozioService,
+              public clienteService: ClienteService,
               private route:Router) { }
 
 
@@ -50,23 +55,25 @@ export class SpedizioniPage implements OnInit {
       });
 }
 
-  async presentActionSheet(ordine) {
+  async presentActionSheet(ordine: Ordine) {
+    console.log(ordine);
     const actionSheet = await this.actionSheetController.create({
       header: 'Actions',
       buttons: [{
         text: 'Accetta',
         icon: 'checkmark-circle-outline',
         handler: () => {
-          ordine.stato = 3;
-          this.ordineService.updateOrdine(ordine, ordine.id);
+          console.log(ordine.id);
+          this.clienteService.updateStato(ordine.id_cliente,ordine.id,0);
+          this.ordineService.updateStato(3,ordine.id);
           console.log('Share clicked');
         }
       }, {
         text: 'Rifiuta',
         icon: 'close-circle-outline',
         handler: () => {
-          ordine.stato = 4;
-          this.ordineService.updateOrdine(ordine, ordine.id);
+          this.clienteService.updateStato(ordine.id_cliente,ordine.id,3);
+          this.ordineService.updateStato(4,ordine.id);
           console.log('Play clicked');
         }
       }, {

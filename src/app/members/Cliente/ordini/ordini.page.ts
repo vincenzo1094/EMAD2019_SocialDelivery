@@ -37,6 +37,7 @@ export class OrdiniPage implements OnInit {
 
 
   toValue(key: number): string {
+    console.log(key);
     console.log("OK");
     if(key == 0) {
       return 'PARTITO';

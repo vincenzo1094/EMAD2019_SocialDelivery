@@ -47,6 +47,20 @@ export class ClienteService {
   }
 
 
+  updateStato(idCliente: string, idOrdine: string, stato: number) {
+    this.clienteCollection.doc<Cliente>(idCliente).valueChanges().subscribe(res =>{
+      for(let or of res.ordini) {
+        if(or.id == idOrdine) {
+          or.stato = stato;
+        }
+      }
+      for(let or of res.ordini) {
+        console.log(or.stato);
+      }
+      this.updateOrdini(idCliente,res.ordini);
+    });
+  }
+
   removeCliente(id) {
     return this.clienteCollection.doc(id).delete();
   }
