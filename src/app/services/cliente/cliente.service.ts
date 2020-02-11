@@ -4,6 +4,8 @@ import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/fires
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {Ordine} from 'src/app/interface/ordine';
+import { Platform } from '@ionic/angular';
+import { Firebase } from '@ionic-native/firebase/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +17,9 @@ export class ClienteService {
 
   private cliente: Observable<Cliente[]>;
 
-  constructor(db: AngularFirestore) {
+  constructor(db: AngularFirestore,
+              private firebase: Firebase,
+              private platform: Platform) {
     
     this.clienteCollection = db.collection<Cliente>('clienti');
     this.collection = db.collection('clienti');
@@ -42,7 +46,12 @@ export class ClienteService {
     this.clienteCollection.doc(id).update(cliente);
   }
 
-  addCliente(cliente: Cliente) {
+  async addCliente(cliente: Cliente) {
+    
+    if (this.platform.is('android')) {
+      cliente.token = await this.firebase.getToken();
+    }
+    
     this.clienteCollection.doc(cliente.email).set(cliente);
   }
 

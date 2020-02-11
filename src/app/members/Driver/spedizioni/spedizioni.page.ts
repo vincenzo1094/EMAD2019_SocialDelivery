@@ -65,15 +65,15 @@ export class SpedizioniPage implements OnInit {
         handler: () => {
           console.log(ordine.id);
           this.clienteService.updateStato(ordine.id_cliente,ordine.id,0);
-          this.ordineService.updateStato(3,ordine.id);
+          this.ordineService.updateStato(0,ordine.id);
           console.log('Share clicked');
         }
       }, {
         text: 'Rifiuta',
         icon: 'close-circle-outline',
         handler: () => {
-          this.clienteService.updateStato(ordine.id_cliente,ordine.id,3);
-          this.ordineService.updateStato(4,ordine.id);
+          this.clienteService.updateStato(ordine.id_cliente,ordine.id,1);
+          this.ordineService.updateStato(1,ordine.id);
           console.log('Play clicked');
         }
       }, {

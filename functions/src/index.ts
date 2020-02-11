@@ -1,5 +1,4 @@
 import * as functions from 'firebase-functions';
-
 import * as admin from 'firebase-admin';
 admin.initializeApp({
     databaseURL: "https://socialdelapp.firebaseio.com",
@@ -7,7 +6,34 @@ admin.initializeApp({
     storageBucket: "socialdelapp.appspot.com",
   });
 
+exports.newSubscriberNotificationClient = functions.firestore
+    .document('clienti/{UserId}')
+    .onUpdate(event =>{
+      //console.log(event.after.data());
+      const clienteAfter = event.after.data();
+      const clientBefore = event.before.data();
+      const ordineAfter:[] = clienteAfter!.ordini;
+      const ordineBefore:[] = clientBefore!.ordini;
+      const payload = {
+        notification: {
+          title: 'Ordine',
+          body: `Il tuo ordine è stato preso in consegna`,
+          icon: 'https://goo.gl/Fz9nrQ'
+        }
+      }
 
+      const tokens: any = [];
+
+      if(ordineAfter!==null && ordineAfter.length == ordineBefore.length){
+         for (let index = 0; index < ordineAfter.length; index++) {
+            if(ordineBefore[index]['stato'] == 2 && ordineAfter[index]['stato'] == 0)
+               tokens.push(clienteAfter!.token);
+        }
+      }
+
+      return admin.messaging().sendToDevice(tokens, payload);      
+    });
+    
 exports.newSubscriberNotification = functions.firestore
     .document('ordini/{UserId}')
     .onCreate(async event => {
