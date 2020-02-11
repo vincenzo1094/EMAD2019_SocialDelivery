@@ -1,0 +1,20 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Dettagli Spedizione</ion-title>
+      
+        <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+ 
+  <ion-content fullscreen>
+
+    <p>Il nome del negozio e': {{negozio.nome}}</p>
+    <p> L'ordine dovrà essere consegnato a:</p>
+   <p>Nome e cognome: {{cliente.nome}} {{cliente.cognome}}</p>
+   <p>Email: {{cliente.email}}</p>
+   <p>Indirizzo: {{cliente.indirizzo}}, {{cliente.citta}}</p>
+  </ion-content>
+  

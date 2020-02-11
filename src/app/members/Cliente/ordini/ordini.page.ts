@@ -30,6 +30,7 @@ export class OrdiniPage implements OnInit {
     this.clienteID = this.navExtra.getCliente();
     this.clienteService.getCliente(this.clienteID).subscribe(res => {
       this.ordini = res.ordini;
+      
     })
     
   }

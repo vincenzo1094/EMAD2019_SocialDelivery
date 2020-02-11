@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'tabsDriver/impostazioni', loadChildren: './members/Driver/impostazioni/impostazioni.module#ImpostazioniPageModule' },
   { path: 'tabsDriver/spedizioni', loadChildren: './members/Driver/spedizioni/spedizioni.module#SpedizioniPageModule' },
   { path: 'tabsDriver/riepilogo', loadChildren: './members/Driver/riepilogo/riepilogo.module#RiepilogoPageModule' },
+  { path: 'tabsDriver/dettagli', loadChildren: './members/Driver/dettagli/dettagli.module#DettagliPageModule' },
   { path: 'tabsEsercente/ordini', loadChildren: './members/Esercente/ordini/ordini.module#OrdiniPageModule' },
   { path: 'tabsEsercente/negozi', loadChildren: './members/Esercente/negozi/negozi.module#NegoziPageModule' },
   { path: 'tabsEsercente/impostazioni', loadChildren: './members/Esercente/impostazioni/impostazioni.module#ImpostazioniPageModule' },

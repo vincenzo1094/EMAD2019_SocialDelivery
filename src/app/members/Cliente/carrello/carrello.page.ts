@@ -12,7 +12,7 @@ import { OrdineService } from 'src/app/services/ordine/ordine.service';
 import { ClienteService } from 'src/app/services/cliente/cliente.service';
 import { ProdottoService } from 'src/app/services/prodotto/prodotto.service';
 import {Cliente} from 'src/app/interface/cliente';
-import { Storage } from '@ionic/storage';
+
 
 
 @Component({
@@ -39,25 +39,18 @@ export class CarrelloPage implements OnInit {
       };
 
   constructor(private route: ActivatedRoute,
-              private navExtra: NavExtrasService,
-              private nav: NavController,
-              public alertController: AlertController,
-              private clientService: ClienteService,
-              private ordService: OrdineService,
-              private prodService: ProdottoService,
-              private storage: Storage) { }
+    private navExtra: NavExtrasService,
+    private nav: NavController,
+    public alertController: AlertController,
+    private clientService: ClienteService,
+    private ordService: OrdineService,
+    private prodService: ProdottoService) { }
 
   ngOnInit() {
     this.totalProducts = this.navExtra.getExtras()[0];
     this.idNegozio = this.navExtra.getExtras()[1];
     this.productsInCart = this.totalProducts.filter(item => item.quantitaCarrello > 0);
-    this.storage.get('cliente').then((val) => {
-      this.idCliente = val;
-      this.clientService.getCliente(this.idCliente).subscribe(res => {
-        this.cliente = res;
-      });
-    });
-    
+    this.idCliente = this.navExtra.getCliente();
   }
 
   getTotale() {
@@ -95,7 +88,6 @@ export class CarrelloPage implements OnInit {
       prodotti: prods,
       totale:this.getTotale()}; 
     
-    console.log(this.cliente.ordini);
     if(this.cliente.ordini == null) {
       this.cliente.ordini = [newOrder]
     }
