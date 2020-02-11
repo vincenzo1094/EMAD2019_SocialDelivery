@@ -60,7 +60,10 @@ export class ClienteService {
       this.updateOrdini(idCliente,res.ordini);
     });
   }
-
+  
+  updateOrdini(idCliente: string, ordini: Ordine[]) {
+    this.clienteCollection.doc(idCliente).update({ordini: ordini});
+  }
   removeCliente(id) {
     return this.clienteCollection.doc(id).delete();
   }
