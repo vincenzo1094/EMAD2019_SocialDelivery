@@ -7,6 +7,7 @@ import {NegozioService} from 'src/app/services/negozio/negozio.service';
 import {Cliente} from 'src/app/interface/cliente';
 import {stato_ordine} from 'src/app/interface/stato_ordine';
 import {NavExtrasService} from 'src/app/interface/NavExtraService';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-ordini',
@@ -18,7 +19,7 @@ export class OrdiniPage implements OnInit {
   ordini: Ordine[] = [];
   clienteID: string = '';
 
-  constructor(public navCtrl: NavController, private route: ActivatedRoute, private clienteService: ClienteService,private navExtra: NavExtrasService,private negService: NegozioService) { }
+  constructor(public navCtrl: NavController, private route: ActivatedRoute, private clienteService: ClienteService,private navExtra: NavExtrasService,private negService: NegozioService,private storage: Storage) { }
 
 
   listElementClicked(ordine: Ordine) {
@@ -27,11 +28,13 @@ export class OrdiniPage implements OnInit {
   }
 
   ngOnInit() {
-    this.clienteID = this.navExtra.getCliente();
-    this.clienteService.getCliente(this.clienteID).subscribe(res => {
-      this.ordini = res.ordini;
-      
+    this.storage.get('cliente').then((val) =>{
+      this.clienteID = val;
+      this.clienteService.getCliente(this.clienteID).subscribe(res => {
+        this.ordini = res.ordini;
+      })
     })
+    
     
   }
 

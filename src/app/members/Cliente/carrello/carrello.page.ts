@@ -12,7 +12,7 @@ import { OrdineService } from 'src/app/services/ordine/ordine.service';
 import { ClienteService } from 'src/app/services/cliente/cliente.service';
 import { ProdottoService } from 'src/app/services/prodotto/prodotto.service';
 import {Cliente} from 'src/app/interface/cliente';
-
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-carrello',
@@ -43,13 +43,20 @@ export class CarrelloPage implements OnInit {
     public alertController: AlertController,
     private clientService: ClienteService,
     private ordService: OrdineService,
-    private prodService: ProdottoService) { }
+    private prodService: ProdottoService,
+    private storage: Storage) { }
 
   ngOnInit() {
     this.totalProducts = this.navExtra.getExtras()[0];
     this.idNegozio = this.navExtra.getExtras()[1];
     this.productsInCart = this.totalProducts.filter(item => item.quantitaCarrello > 0);
-    this.idCliente = this.navExtra.getCliente();
+    this.storage.get('cliente').then((val) =>{
+      this.idCliente = val;
+      this.clientService.getCliente(this.idCliente).subscribe(res =>{
+        this.cliente = res;
+      });
+    });
+    
   }
 
   getTotale() {
@@ -92,13 +99,14 @@ export class CarrelloPage implements OnInit {
     var id = this.idCliente;
     this.ordService.addOrdine(newOrder).then(function(elem){
       newOrder.id = elem.id;
+      console.log(client.ordini);
       if(client.ordini == null) {
         client.ordini = [newOrder]
       }
       else {
         client.ordini.push(newOrder);
       }
-      console.log(client.ordini);
+      
       
       service.updateOrdini(id,client.ordini);
       
