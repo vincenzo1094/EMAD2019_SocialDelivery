@@ -87,14 +87,6 @@ export class CarrelloPage implements OnInit {
       prodotti: prods,
       totale:this.getTotale()}; 
 
-    
-    if(this.cliente.ordini == null) {
-      this.cliente.ordini = [newOrder]
-    }
-    else {
-      this.cliente.ordini.push(newOrder);
-      console.log(this.cliente.ordini);
-    }
     var client = this.cliente;
     var service = this.clientService;
     var id = this.idCliente;
